@@ -17,7 +17,7 @@ class CategoriesApiController extends BaseApiController
     {
         $data = QueryBuilder::for(Category::class)
             ->selectFields($request->input('fields.forum_categories'))
-            ->allowedSorts(['id', 'position', 'name', 'color'])
+            ->allowedSorts(['id', 'position', 'name_translated', 'color'])
             ->allowedFilters([
                 AllowedFilter::custom('name,color', new FilterOr()),
             ])
