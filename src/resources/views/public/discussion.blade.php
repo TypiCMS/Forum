@@ -89,7 +89,7 @@
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                 <input type="hidden" name="forum_discussion_id" value="{{ $discussion->id }}">
 
-                <div class="forum-new-post-avatar" style="background-color:#<?= \TypiCMS\Modules\Forum\Helpers\ForumHelper::stringToColorCode(Auth::user()->first_name) ?>">
+                <div class="forum-new-post-avatar" style="background-color:#<?= \TypiCMS\Modules\Forum\Helpers\ForumHelper::stringToColorCode(Auth::user()->first_name); ?>">
                     {{ strtoupper(substr(Auth::user()->first_name, 0, 1)) }}
                 </div>
 
