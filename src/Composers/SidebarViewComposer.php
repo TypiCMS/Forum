@@ -14,7 +14,7 @@ class SidebarViewComposer
         if (Gate::denies('see-all-forum-categories') && Gate::denies('see-all-forum-discussions')) {
             return;
         }
-        $view->sidebar->group(__('Workspace'), function (SidebarGroup $group) {
+        $view->sidebar->group(__('Forum'), function (SidebarGroup $group) {
             $group->id = 'forum';
             $group->weight = 30;
             if (Gate::allows('see-all-forum-categories')) {
