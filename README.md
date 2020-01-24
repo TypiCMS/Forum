@@ -17,7 +17,7 @@ A forum with categories, discussions and posts.
 
 ## Road Map
 
-Make the categories translatable
+[] Make the categories translatable
 
 Enjoy!
 
