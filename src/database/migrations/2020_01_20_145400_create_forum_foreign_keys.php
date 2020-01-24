@@ -27,11 +27,11 @@ class CreateForumForeignKeys extends Migration
 
     public function down()
     {
-        Schema::table('forum_discussion', function (Blueprint $table) {
+        Schema::table('forum_discussions', function (Blueprint $table) {
             $table->dropForeign(['forum_category_id']);
             $table->dropForeign(['user_id']);
         });
-        Schema::table('forum_post', function (Blueprint $table) {
+        Schema::table('forum_posts', function (Blueprint $table) {
             $table->dropForeign(['forum_discussion_id']);
             $table->dropForeign(['user_id']);
         });

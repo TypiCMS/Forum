@@ -10,8 +10,8 @@ class CreateForumCategoriesTable extends Migration
         Schema::create('forum_categories', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('position');
-            $table->string('name');
-            $table->string('slug');
+            $table->json('name');
+            $table->json('slug');
             $table->string('color', 7);
             $table->softDeletes();
             $table->timestamps();
