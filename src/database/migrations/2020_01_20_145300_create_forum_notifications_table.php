@@ -15,8 +15,8 @@ class CreateForumNotificationsTable extends Migration
         Schema::create('forum_notifications', function (Blueprint $table) {
             $table->unsignedBigInteger('user_id')->index();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->unsignedInteger('discussion_id')->index();
-            $table->foreign('discussion_id')->references('id')->on('forum_discussion')->onDelete('cascade');
+            $table->unsignedBigInteger('discussion_id')->index();
+            $table->foreign('discussion_id')->references('id')->on('forum_discussions')->onDelete('cascade');
             $table->primary(['user_id', 'discussion_id']);
         });
     }

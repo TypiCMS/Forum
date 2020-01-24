@@ -8,8 +8,8 @@ class CreateForumPostsTable extends Migration
     public function up()
     {
         Schema::create('forum_posts', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('forum_discussion_id')->unsigned();
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('forum_discussion_id');
             $table->unsignedBigInteger('user_id');
             $table->text('body');
             $table->softDeletes();

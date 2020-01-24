@@ -8,7 +8,7 @@ class CreateForumDiscussionsTable extends Migration
     public function up()
     {
         Schema::create('forum_discussions', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->unsignedInteger('forum_category_id');
             $table->string('title');
             $table->string('slug')->unique();
