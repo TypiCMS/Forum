@@ -39,6 +39,10 @@ class ModuleProvider extends ServiceProvider
             __DIR__.'/../resources/scss' => resource_path('scss'),
         ], 'resources');
 
+        $this->publishes([
+            __DIR__.'/../../public' => public_path(),
+        ], 'public');
+
         /*
          * Sidebar view composer
          */
