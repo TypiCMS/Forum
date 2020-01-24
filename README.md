@@ -1,6 +1,6 @@
 # Forum
 
-A forum with categories, discussions and posts.
+A forum with categories, discussions and posts. Currently in Beta.
 
 ## Installation
 
