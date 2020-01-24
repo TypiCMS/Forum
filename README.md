@@ -15,6 +15,10 @@ A forum with categories, discussions and posts.
 9. Create some forum categories.
 10. Create a page linked to the Forum module and navigate to this page on the public side.
 
+## Road Map
+
+Make the categories translatable
+
 Enjoy!
 
 This module is part of [TypiCMS](https://github.com/TypiCMS/Base), a multilingual CMS based on the [Laravel framework](https://github.com/laravel/framework).
