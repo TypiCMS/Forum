@@ -1,0 +1,369 @@
+.forum {
+	&-hero {
+		width: 100%;
+		min-height: 180px;
+		position: relative;
+		text-align: center;
+		background-color: $gray-900;
+		padding: 2rem 0;
+		h1 {
+			text-align: center;
+			position: relative;
+			color: $white;
+			margin-top: 0px;
+			margin-bottom: 0;
+		}
+		p {
+			text-align: center;
+			color: $gray-400;
+			position: relative;
+			z-index: 2;
+			margin-bottom: 0px;
+		}
+	}
+	&-header {
+		background: $gray-900;
+		width: 100%;
+		min-height: 120px;
+		display: flex;
+		align-items: flex-end;
+		&-container {
+			@extend .container;
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			flex-wrap: wrap;
+		}
+		&-title {
+			margin: 1rem 0;
+			font-size: 1.5rem;
+			color: $gray-100;
+			font-weight: 400;
+			flex-grow: 1;
+			line-height: 1.45;
+		}
+		&-details {
+			color: $gray-400;
+			color: rgba(255, 255, 255, 0.85);
+			font-size: 0.85rem;
+			flex-shrink: 0;
+			margin: 1rem 0 1rem 10px;
+		}
+		&-category {
+			border-radius: 15px;
+			color: $white;
+			padding: 5px 10px;
+			margin-left: 10px;
+			&:hover {
+				text-decoration: none;
+			}
+		}
+		&-back-button {
+			@extend .btn;
+			line-height: 36px;
+			font-size: 15px;
+			margin-right: 10px;
+			border-radius: 50%;
+			padding: 0px;
+			background: rgba(0, 0, 0, 0.2);
+			width: 34px;
+			height: 34px;
+			flex-shrink: 0;
+			text-align: center;
+			color: rgba(255, 255, 255, 0.8);
+			&:hover,
+			&:focus {
+				text-decoration: none;
+				background: rgba(0, 0, 0, 0.4);
+				color: $white;
+			}
+		}
+	}
+	&-container {
+		@extend .container;
+		margin-top: 4rem;
+		padding-bottom: 4rem;
+	}
+	.alert {
+		color: $white;
+		&-dismissible {
+			padding: 0.75rem 1.25rem;
+			.close {
+				padding-top: 0;
+				font-weight: normal;
+				opacity: 1;
+				color: $white;
+			}
+		}
+	}
+}
+
+.forum-post-delete-alert {
+	background: $gray-100;
+	color: $gray-600;
+	display: none;
+	padding: 12px 30px;
+	margin-bottom: 20px;
+	border-radius: 30px;
+	align-items: center;
+	justify-content: space-between;
+	&-icon {
+		margin-right: 10px;
+		flex-shrink: 0;
+	}
+	&-message {
+		margin-right: 10px;
+		flex-grow: 1;
+	}
+	&-cancel {
+		@extend .btn;
+		@extend .btn-sm;
+		margin-left: 5px;
+		flex-shrink: 0;
+	}
+	&-confirm {
+		@extend .btn;
+		@extend .btn-sm;
+		@extend .btn-danger;
+		margin-left: 5px;
+		flex-shrink: 0;
+	}
+}
+
+.forum-discussion-list {
+	@extend .list-unstyled;
+	border-bottom: 1px solid $gray-200;
+	margin-bottom: 1.5rem;
+}
+.forum-discussion {
+	&-link {
+		display: flex;
+		justify-content: space-between;
+		padding: 1rem 1rem 0.5rem;
+		transition: background 0.3s ease;
+		border-top: 1px solid $gray-200;
+		&:hover,
+		&:focus {
+			text-decoration: none;
+			background-color: $gray-100;
+		}
+	}
+	&-avatar {
+		@extend .forum-avatar;
+	}
+	&-content {
+		flex-grow: 1;
+		&-title {
+			margin: 0.25rem 0 0.15rem;
+			color: $gray-900;
+			font-size: 1.5rem;
+			font-weight: bold;
+		}
+		&-category {
+			@extend .badge;
+			@extend .badge-info;
+			border-radius: 0.25rem;
+			font-size: 0.85rem;
+			font-weight: bold;
+			padding: 3px 7px;
+			position: relative;
+			top: -3px;
+		}
+		&-info {
+			font-size: 1rem;
+			color: $gray-700;
+			margin-bottom: 0.75rem;
+		}
+		&-text {
+			font-size: 1.25rem;
+			color: $gray-500;
+		}
+	}
+	&-count {
+		flex-shrink: 0;
+		color: $gray-500;
+	}
+}
+
+.forum-post-list {
+	@extend .list-unstyled;
+	border-bottom: 1px solid $gray-200;
+	margin-bottom: 1.5rem;
+}
+
+.forum-post {
+	border-top: 1px solid $gray-200;
+	padding: 1rem 1rem 0.5rem;
+	&-container {
+		display: flex;
+	}
+	&-avatar {
+		@extend .forum-avatar;
+	}
+	&-content {
+		flex-grow: 1;
+		&-form {
+			display: none;
+		}
+		&-info {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			margin-bottom: 0.75rem;
+			line-height: 1;
+			&-container {
+				margin-top: 0.25rem;
+			}
+			&-name {
+				font-weight: bold;
+				color: $gray-900;
+				font-size: 1.25rem;
+				margin-right: 0.5rem;
+			}
+			&-date {
+				font-size: 1rem;
+				color: $gray-500;
+			}
+		}
+		&-text {
+			font-size: 1.25rem;
+		}
+	}
+	&-actions {
+		&-button {
+			@extend .btn;
+			@extend .btn-light;
+			border-radius: 1rem;
+			font-size: 0.85rem;
+			padding: 0 0.5rem;
+			margin-left: 0.3rem;
+			text-transform: none;
+			font-weight: normal;
+			.fa {
+				color: $gray-500;
+			}
+		}
+	}
+	&.editing {
+		.forum-post-content-wrapper {
+			display: none;
+		}
+		.forum-post-content-form {
+			display: block;
+		}
+	}
+	&.deleting {
+		.forum-post-actions {
+			display: none;
+		}
+		.forum-post-delete-alert {
+			display: flex;
+		}
+	}
+}
+
+.forum-actions {
+	padding-top: 1rem;
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+	&-notification {
+		border-radius: 30px;
+		height: 34px;
+		width: auto;
+		padding: 0 2rem;
+		background: $gray-100;
+		font-size: 1.25rem;
+		margin: 0 10px 0 0;
+		color: $gray-500;
+		line-height: 2.125rem;
+		&-loader {
+			display: none;
+			position: relative;
+			top: 0;
+			left: -24px;
+			&.loading {
+				display: block;
+				float: left;
+				top: 9px;
+			}
+		}
+	}
+}
+
+.forum-avatar {
+	border-radius: 50%;
+	color: rgba($white, 1);
+	display: inline-block;
+	flex-shrink: 0;
+	font-size: 1.5rem;
+	height: 60px;
+	line-height: 62px;
+	margin-right: 1rem;
+	text-align: center;
+	width: 60px;
+}
+
+.forum-new-post {
+	display: flex;
+	padding: 1rem;
+	&-avatar {
+		@extend .forum-avatar;
+	}
+	&-editor {
+		flex-grow: 1;
+		margin-top: 0.5rem;
+		label {
+			font-size: 1.25rem;
+		}
+	}
+}
+
+.forum-sidebar {
+	&-create-button {
+		@extend .btn;
+		@extend .btn-block;
+		@extend .btn-primary;
+		margin-bottom: 2rem;
+		line-height: 1.125;
+		padding-top: 0.5rem;
+		padding-bottom: 0.25rem;
+	}
+	&-category-list {
+		@extend .list-unstyled;
+	}
+	&-category-item {
+		display: block;
+		margin-bottom: 2px;
+		&-all {
+			margin-bottom: 1rem;
+		}
+		&-link {
+			color: $gray-500;
+			padding: 10px 0 10px 15px;
+			display: flex;
+			align-items: center;
+			font-size: 1.25rem;
+			line-height: 1.125;
+			&.active,
+			&:hover,
+			&:focus {
+				text-decoration: none;
+				background-color: $gray-100;
+				color: $gray-900;
+			}
+		}
+		&-icon {
+			width: 40px;
+			text-align: center;
+		}
+		&-box {
+			display: block;
+			width: 14px;
+			height: 14px;
+			border-radius: 2px;
+			margin-right: 10px;
+			margin: 0 auto;
+		}
+	}
+}
