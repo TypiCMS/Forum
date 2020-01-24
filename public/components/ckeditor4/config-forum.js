@@ -10,11 +10,8 @@ var editorConfig = {
     contentsCss: ['/css/public.css', '/components/ckeditor4/custom.css'],
     language: $('html').attr('lang'),
     stylesSet: [],
-    extraPlugins: ['codemirror', 'autogrow'],
-    autoGrow_minHeight: 250,
-    autoGrow_maxHeight: 600,
+    extraPlugins: ['codemirror'],
     removePlugins: 'elementspath',
-    resize_enabled: false,
     codemirror: {
         theme: 'twilight',
     },
