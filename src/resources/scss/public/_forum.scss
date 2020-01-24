@@ -313,9 +313,6 @@
         @extend .btn-block;
         @extend .btn-primary;
         margin-bottom: 2rem;
-        line-height: 1.125;
-        padding-top: 0.5rem;
-        padding-bottom: 0.25rem;
     }
     &-category-list {
         @extend .list-unstyled;
@@ -332,7 +329,6 @@
             display: flex;
             align-items: center;
             font-size: 1.25rem;
-            line-height: 1.125;
             &.active,
             &:hover,
             &:focus {
