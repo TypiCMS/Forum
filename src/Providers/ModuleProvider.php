@@ -28,32 +28,16 @@ class ModuleProvider extends ServiceProvider
         $modules = $this->app['config']['typicms']['modules'];
         $this->app['config']->set('typicms.modules', array_merge(['forum' => ['linkable_to_page']], $modules));
 
-        $this->loadTranslationsFrom(__DIR__.'/Lang', 'forum');
         $this->loadViewsFrom(__DIR__.'/../resources/views/', 'forum');
-
-        $this->publishes([
-            __DIR__.'/../public/assets' => public_path('vendor/forum/assets'),
-        ], 'forum_assets');
-
-        $this->publishes([
-            __DIR__.'/../config/forum.php' => config_path('forum.php'),
-        ], 'forum_config');
-
-        $this->publishes([
-            __DIR__.'/../database/migrations/' => database_path('migrations'),
-        ], 'forum_migrations');
-
-        $this->publishes([
-            __DIR__.'/../database/seeds/' => database_path('seeds'),
-        ], 'forum_seeds');
-
-        $this->publishes([
-            __DIR__.'/Lang' => resource_path('lang/vendor/forum'),
-        ], 'forum_lang');
+        $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
 
         $this->publishes([
             __DIR__.'/../resources/views' => resource_path('views/vendor/forum'),
         ], 'views');
+
+        $this->publishes([
+            __DIR__.'/../resources/scss' => resource_path('scss'),
+        ], 'resources');
 
         /*
          * Sidebar view composer
@@ -68,28 +52,14 @@ class ModuleProvider extends ServiceProvider
         });
     }
 
-    /**
-     * Register the application services.
-     *
-     * @return void
-     */
     public function register()
     {
         $app = $this->app;
 
-        /*
-         * Register route service provider
-         */
         $app->register(RouteServiceProvider::class);
 
-        /*
-         * Register the service provider for the dependency.
-         */
         $app->register(PurifierServiceProvider::class);
 
-        /*
-         * Create aliases for the dependency.
-         */
         AliasLoader::getInstance()->alias('Purifier', Purifier::class);
     }
 }
