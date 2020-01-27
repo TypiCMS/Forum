@@ -8,9 +8,9 @@ use Illuminate\Routing\Controller as Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Mews\Purifier\Facades\Purifier;
+use TypiCMS\Modules\Core\Services\FileUploader;
 use TypiCMS\Modules\Forum\Events\ForumAfterNewResponse;
 use TypiCMS\Modules\Forum\Events\ForumBeforeNewResponse;
-use TypiCMS\Modules\Forum\Mail\ForumDiscussionUpdated;
 use TypiCMS\Modules\Forum\Models\Category;
 use TypiCMS\Modules\Forum\Models\Discussion;
 use TypiCMS\Modules\Forum\Models\Post;
@@ -18,7 +18,7 @@ use TypiCMS\Modules\Forum\Notifications\ForumDiscussionUpdated;
 
 class PublicPostController extends Controller
 {
-    public function store(Request $request)
+    public function store(Request $request, FileUploader $fileUploader)
     {
         $data = [
             'body' => Purifier::clean($request->body),
@@ -51,6 +51,11 @@ class PublicPostController extends Controller
 
                 return back()->with($forumAlert)->withInput();
             }
+        }
+
+        $data['files'] = [];
+        foreach ($request->file('files') as $file) {
+            $data['files'][] = $fileUploader->handle($file, 'workspace');
         }
 
         $newPost = Post::create($data);

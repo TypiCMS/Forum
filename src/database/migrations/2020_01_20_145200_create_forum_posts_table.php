@@ -12,6 +12,7 @@ class CreateForumPostsTable extends Migration
             $table->unsignedBigInteger('forum_discussion_id');
             $table->unsignedBigInteger('user_id');
             $table->text('body');
+            $table->json('files');
             $table->softDeletes();
             $table->timestamps();
         });

@@ -17,9 +17,14 @@ class Post extends Base
         'forum_discussion_id',
         'user_id',
         'body',
+        'files',
     ];
 
     protected $dates = ['deleted_at'];
+
+    protected $casts = [
+        'files' => 'array',
+    ];
 
     public function discussion(): BelongsTo
     {

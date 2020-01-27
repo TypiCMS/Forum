@@ -69,6 +69,20 @@
                                 @endif
                             </div>
                             <div class="forum-post-content-text">{!! $post->body !!}</div>
+                            @if (is_array($post->files) && count($post->files) > 0)
+                            <div class="forum-post-content-files">
+                                <ul class="forum-post-content-files-list">
+                                    @foreach ($post->files as $file)
+                                    <li class="forum-post-content-files-item">
+                                        <a class="forum-post-content-files-item-link" href="{{ Storage::url($file['path']) }}">
+                                            <span class="forum-post-content-files-item-icon fa fa-file fa-fw"></span>
+                                            <span class="forum-post-content-files-item-name">{{ $file['filename'] }}</span>
+                                        </a>
+                                    </li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                            @endif
                         </div>
 
                     </div>
@@ -85,7 +99,7 @@
 
         @if(auth()->check())
 
-            <form class="forum-new-post" id="new_response" action="{{ route('forum.posts.store') }}" method="post">
+            <form class="forum-new-post" id="new_response" action="{{ route('forum.posts.store') }}" method="post" enctype="multipart/form-data">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                 <input type="hidden" name="forum_discussion_id" value="{{ $discussion->id }}">
 
@@ -94,8 +108,14 @@
                 </div>
 
                 <div class="forum-new-post-editor" id="editor">
-                    <label for="body">@lang('Type your response here…')</label>
-                    <textarea class="form-control ckeditor-forum" id="body" name="body" placeholder="">{{ old('body') }}</textarea>
+                    <div class="form-group">
+                        <label for="body">@lang('Type your response here…')</label>
+                        <textarea class="form-control ckeditor-forum" id="body" name="body" placeholder="">{{ old('body') }}</textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="files">Documents</label>
+                        <input class="form-control-file" type="file" name="files[]" id="files" multiple="multiple">
+                    </div>
                     <div class="forum-discussion-actions forum-actions">
                         @if (config('typicms.forum.email.enabled'))
                             <div class="forum-discussion-actions-notification forum-actions-notification">

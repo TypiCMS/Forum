@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use Mews\Purifier\Facades\Purifier;
+use TypiCMS\Modules\Core\Services\FileUploader;
 use TypiCMS\Modules\Forum\Events\ForumAfterNewDiscussion;
 use TypiCMS\Modules\Forum\Events\ForumBeforeNewDiscussion;
 use TypiCMS\Modules\Forum\Models\Category;
@@ -32,7 +33,7 @@ class PublicDiscussionController extends Controller
         return view('forum::public.discussion-create', compact('categories', 'currentCategory'));
     }
 
-    public function store(Request $request)
+    public function store(Request $request, FileUploader $fileUploader)
     {
         $data = [
             'title' => strip_tags($request->title),
@@ -120,6 +121,11 @@ class PublicDiscussionController extends Controller
 
         // add the user to automatically be notified when new posts are submitted
         $discussion->users()->attach($userId);
+
+        $postData['files'] = [];
+        foreach ($request->file('files') as $file) {
+            $data['files'][] = $fileUploader->handle($file, 'workspace');
+        }
 
         $post = Post::create($postData);
 

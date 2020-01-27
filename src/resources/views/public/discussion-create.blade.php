@@ -22,7 +22,7 @@
 
     <div class="forum-container">
 
-        <form action="{{ route('forum.discussion.store') }}" method="post">
+        <form action="{{ route('forum.discussion.store') }}" method="post" enctype="multipart/form-data">
             @csrf
             <div class="form-row">
                 <div class="col-md-8">
@@ -50,8 +50,14 @@
                 </div>
             </div>
             <div class="form-group">
-                <label for="body">@lang('Type your discussion here…')</label>
-                <textarea id="body" class="form-control ckeditor-forum" name="body">{{ old('body') }}</textarea>
+                <div class="form-group">
+                    <label for="body">@lang('Type your discussion here…')</label>
+                    <textarea id="body" class="form-control ckeditor-forum" name="body">{{ old('body') }}</textarea>
+                </div>
+                <div class="form-group">
+                    <label for="files">Documents</label>
+                    <input class="form-control-file" type="file" name="files[]" id="files" multiple="multiple">
+                </div>
             </div>
             <div class="forum-actions">
                 <a href="{{ route('forum.home') }}" class="btn btn-default" id="cancel_discussion">@lang('Cancel')</a>

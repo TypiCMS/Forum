@@ -51,13 +51,6 @@ class Discussion extends Base
         return $this->hasMany(Post::class, 'forum_discussion_id')->withTrashed()->orderBy('created_at');
     }
 
-    public function postsCount()
-    {
-        return $this->posts()
-            ->selectRaw('forum_discussion_id, count(*)-1 as total')
-            ->groupBy('forum_discussion_id');
-    }
-
     public function users(): BelongsToMany
     {
         return $this->belongsToMany(User::class, 'forum_notifications', 'discussion_id', 'user_id');

@@ -13,7 +13,6 @@ class PublicCategoryController extends Controller
         $discussionsQuery = Discussion::with([
                 'user',
                 'post',
-                'postsCount',
                 'category',
             ])
             ->order();
