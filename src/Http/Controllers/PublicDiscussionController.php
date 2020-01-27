@@ -19,14 +19,14 @@ class PublicDiscussionController extends Controller
 {
     public function create()
     {
-        $categories = Category::order()->all();
+        $categories = Category::order()->get();
 
         return view('forum::public.discussion-create', compact('categories'));
     }
 
     public function createInCategory(string $category)
     {
-        $categories = Category::order()->all();
+        $categories = Category::order()->get();
         $currentCategory = Category::where('slug', $category)->first();
 
         return view('forum::public.discussion-create', compact('categories', 'currentCategory'));
