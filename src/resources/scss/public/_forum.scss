@@ -213,6 +213,40 @@
                 color: $gray-500;
             }
         }
+        &-files {
+            border-radius: 5px;
+            &-list {
+                @extend .list-unstyled;
+                margin-bottom: 1rem;
+            }
+            &-item {
+                margin-bottom: 0;
+                padding: 0;
+                margin: 0;
+                font-size: 0.85rem;
+                display: inline-block;
+                &-link {
+                    background-color: $gray-100;
+                    color: $gray-900;
+                    display: inline-flex;
+                    padding: 0.2rem 0.3rem;
+                    &:hover,
+                    &:focus {
+                        text-decoration: none;
+                        background-color: $gray-200;
+                        color: $gray-900;
+                    }
+                }
+                &-icon {
+                    color: $green;
+                    margin-top: 0.15rem;
+                    margin-right: 0.25rem;
+                }
+                &-name {
+                    line-height: 1;
+                }
+            }
+        }
         &-text {
             font-size: 1.25rem;
         }
