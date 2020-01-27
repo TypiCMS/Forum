@@ -86,12 +86,12 @@ class PublicDiscussionController extends Controller
         // Let’s guarantee that we always have a generic slug.
         $slug = Str::slug($data['title'], '-');
 
-        $discussionExists = Discussion::where('slug', '=', $slug)->withTrashed()->first();
+        $discussionExists = Discussion::where('slug', $slug)->withTrashed()->first();
         $incrementer = 1;
         $newSlug = $slug;
         while (isset($discussionExists->id)) {
             $newSlug = $slug.'-'.$incrementer;
-            $discussionExists = Discussion::where('slug', '=', $newSlug)->withTrashed()->first();
+            $discussionExists = Discussion::where('slug', $newSlug)->withTrashed()->first();
             ++$incrementer;
         }
 
@@ -163,7 +163,7 @@ class PublicDiscussionController extends Controller
 
         $past = Carbon::now()->subMinutes(config('typicms.forum.security.time_between_posts'));
 
-        $last_discussion = Discussion::where('user_id', '=', $user->id)->where('created_at', '>=', $past)->first();
+        $last_discussion = Discussion::where('user_id', $user->id)->where('created_at', '>=', $past)->first();
 
         if (isset($last_discussion)) {
             return true;
@@ -174,7 +174,7 @@ class PublicDiscussionController extends Controller
 
     public function show(string $category, string $slug)
     {
-        $discussion = Discussion::where('slug', '=', $slug)->firstOrFail();
+        $discussion = Discussion::where('slug', $slug)->firstOrFail();
         $discussion_category = Category::find($discussion->forum_category_id);
 
         if ($category !== $discussion_category->slug) {
@@ -183,7 +183,7 @@ class PublicDiscussionController extends Controller
         }
 
         $posts = Post::with('user')
-            ->where('forum_discussion_id', '=', $discussion->id)
+            ->where('forum_discussion_id', $discussion->id)
             ->order()
             ->paginate(10);
 
