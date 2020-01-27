@@ -20,7 +20,7 @@ class ForumDiscussionUpdated extends Notification
      */
     public function __construct($discussion)
     {
-        $this->discussion = $discussion
+        $this->discussion = $discussion;
     }
 
     /**
@@ -45,7 +45,7 @@ class ForumDiscussionUpdated extends Notification
         return (new MailMessage)
             ->line(trans('Just wanted to let you know that someone has responded to a forum post.'))
             ->action(trans('View the discussion.'), route('forum.discussion.showInCategory', [$this->discussion->category->slug, $this->discussion->slug]))
-            ->line(trans('If you no longer wish to be notified when someone responds to this form post be sure to uncheck the notification setting at the bottom of the page.'));
+            ->line(trans('If you no longer wish to be notified when someone responds to this form post be sure to uncheck the notification setting at the bottom of the page.'))
             ->line(trans('Have a great day!'));
     }
 
