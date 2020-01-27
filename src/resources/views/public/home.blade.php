@@ -55,12 +55,12 @@
                             <div class="forum-discussion-content">
                                 <h2 class="forum-discussion-content-title">{{ $discussion->title }} <div class="forum-discussion-content-category" style="background-color:{{ $discussion->category->color }}">{{ $discussion->category->name }}</div></h2>
                                 <div class="forum-discussion-content-info">@lang('Posted by') {{ $discussion->user->first_name.' '.$discussion->user->last_name }} {{ \Carbon\Carbon::createFromTimeStamp(strtotime($discussion->created_at))->diffForHumans() }}</div>
-                                @if ($firstPost = $discussion->post->first() and $firstPost !== null)
+                                @if ($firstPost = $discussion->posts->first() and $firstPost !== null)
                                 <p class="forum-discussion-content-text">{{ substr(strip_tags($firstPost->body), 0, 200) }}@if(strlen(strip_tags($firstPost->body)) > 200){{ '…' }}@endif</p>
                                 @endif
                             </div>
                             <div class="forum-discussion-count">
-                                <span class="fa fa-comment-o fa-fw"></span> {{ $discussion->post->count()-1 }}
+                                <span class="fa fa-comment-o fa-fw"></span> {{ $discussion->posts->count()-1 }}
                             </div>
                         </a>
                     </li>

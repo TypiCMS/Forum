@@ -12,9 +12,10 @@ class PublicController extends Controller
     {
         $discussions = Discussion::with([
                 'user',
-                'post',
+                'posts',
                 'category',
             ])
+            ->has('posts')
             ->order()
             ->paginate(config('typicms.forum.per_page'));
 

@@ -12,9 +12,10 @@ class PublicCategoryController extends Controller
     {
         $discussionsQuery = Discussion::with([
                 'user',
-                'post',
+                'posts',
                 'category',
             ])
+            ->has('posts')
             ->order();
 
         $currentCategory = Category::where('slug', $slug)->firstOrFail();

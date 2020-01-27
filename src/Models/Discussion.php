@@ -41,11 +41,6 @@ class Discussion extends Base
         return $this->hasMany(Post::class, 'forum_discussion_id');
     }
 
-    public function post(): HasMany
-    {
-        return $this->hasMany(Post::class, 'forum_discussion_id')->orderBy('created_at');
-    }
-
     public function postsWithTrashed(): HasMany
     {
         return $this->hasMany(Post::class, 'forum_discussion_id')->withTrashed()->orderBy('created_at');
