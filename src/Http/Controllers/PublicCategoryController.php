@@ -18,7 +18,7 @@ class PublicCategoryController extends Controller
             ->has('posts')
             ->order();
 
-        $currentCategory = Category::where('slug', $slug)->firstOrFail();
+        $currentCategory = Category::where('slug->'.config('app.locale'), $slug)->firstOrFail();
 
         $discussionsQuery = $discussionsQuery->where('forum_category_id', $currentCategory->id);
 
