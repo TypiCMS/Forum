@@ -125,7 +125,7 @@ class PublicDiscussionController extends Controller
         $postData['files'] = [];
         if ($request->has('files')) {
             foreach ($request->file('files') as $file) {
-                $postData['files'][] = $fileUploader->handle($file, 'workspace');
+                $postData['files'][] = $fileUploader->handle($file, 'workspace', config('typicms.forum.disk'));
             }
         }
 

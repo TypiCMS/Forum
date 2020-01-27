@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller as Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Mews\Purifier\Facades\Purifier;
 use TypiCMS\Modules\Core\Services\FileUploader;
@@ -56,7 +57,7 @@ class PublicPostController extends Controller
         $data['files'] = [];
         if ($request->has('files')) {
             foreach ($request->file('files') as $file) {
-                $data['files'][] = $fileUploader->handle($file, 'workspace');
+                $data['files'][] = $fileUploader->handle($file, 'workspace', config('typicms.forum.disk'));
             }
         }
 
@@ -102,6 +103,17 @@ class PublicPostController extends Controller
                 ->route('forum.discussion.showInCategory', [$category->slug, $discussion->slug])
                 ->with($forumAlert);
         }
+    }
+
+    public function download(Request $request)
+    {
+        $filePath = $request->input('file_path');
+
+        if (!Storage::disk(config('typicms.forum.disk'))->has($filePath)) {
+            abort(404);
+        }
+
+        return Storage::disk(config('typicms.forum.disk'))->download($filePath);
     }
 
     private function notEnoughTimeBetweenPosts()

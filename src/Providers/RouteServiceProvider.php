@@ -26,6 +26,7 @@ class RouteServiceProvider extends ServiceProvider
     public function map()
     {
         Route::namespace($this->namespace)->group(function (Router $router) {
+
             /*
              * Front office routes
              */
@@ -41,6 +42,7 @@ class RouteServiceProvider extends ServiceProvider
                         $router->post('discussion', 'PublicDiscussionController@store')->name('forum.discussion.store');
                         $router->post('discussion/{discussion}/email', 'PublicDiscussionController@toggleEmailNotification')->name('forum.discussion.email');
                         $router->post('posts', 'PublicPostController@store')->name('forum.posts.store');
+                        $router->get('download', 'PublicPostController@download')->name('forum.file.download');
                         $router->patch('posts/{post}', 'PublicPostController@update')->name('forum.posts.update');
                         $router->delete('posts/{post}', 'PublicPostController@destroy')->name('forum.posts.destroy');
                         $router->get('atom', 'PublicAtomController@index')->name('forum.atom');

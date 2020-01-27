@@ -74,7 +74,7 @@
                                 <ul class="forum-post-content-files-list">
                                     @foreach ($post->files as $file)
                                     <li class="forum-post-content-files-item">
-                                        <a class="forum-post-content-files-item-link" href="{{ Storage::url($file['path']) }}">
+                                        <a class="forum-post-content-files-item-link" href="{{ route('forum.file.download', ['file_path' => $file['path']]) }}">
                                             <span class="forum-post-content-files-item-icon fa fa-file fa-fw"></span>
                                             <span class="forum-post-content-files-item-name">{{ $file['filename'] }}</span>
                                         </a>
