@@ -261,6 +261,7 @@
             margin-left: 0.3rem;
             text-transform: none;
             font-weight: normal;
+            white-space: nowrap;
             .fa {
                 color: $gray-500;
             }
@@ -289,9 +290,9 @@
     display: flex;
     justify-content: flex-end;
     align-items: center;
+    flex-wrap: wrap;
     &-notification {
         border-radius: 30px;
-        height: 34px;
         width: auto;
         padding: 0 2rem;
         background: $gray-100;
