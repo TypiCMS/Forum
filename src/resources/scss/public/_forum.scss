@@ -218,18 +218,20 @@
             &-list {
                 @extend .list-unstyled;
                 margin-bottom: 1rem;
+                display: flex;
+                flex-wrap: wrap;
             }
             &-item {
                 margin-bottom: 0;
                 padding: 0;
-                margin: 0;
+                margin: 3px;
                 font-size: 0.85rem;
                 display: inline-block;
                 &-link {
                     background-color: $gray-100;
                     color: $gray-900;
                     display: inline-flex;
-                    padding: 0.2rem 0.3rem;
+                    padding: 0.2rem;
                     &:hover,
                     &:focus {
                         text-decoration: none;
@@ -239,7 +241,6 @@
                 }
                 &-icon {
                     color: $green;
-                    margin-top: 0.15rem;
                     margin-right: 0.25rem;
                 }
                 &-name {
