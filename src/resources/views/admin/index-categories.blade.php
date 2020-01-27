@@ -28,7 +28,7 @@
         <item-list-column-header name="edit"></item-list-column-header>
         @endcan
         <item-list-column-header name="position" sortable :sort-array="sortArray" :label="$t('Position')"></item-list-column-header>
-        <item-list-column-header name="name" sortable :sort-array="sortArray" :label="$t('Name')"></item-list-column-header>
+        <item-list-column-header name="name_translated" sortable :sort-array="sortArray" :label="$t('Name')"></item-list-column-header>
         <item-list-column-header name="color" sortable :sort-array="sortArray" :label="$t('Color')"></item-list-column-header>
     </template>
 
@@ -38,7 +38,7 @@
         <td>@include('core::admin._button-edit', ['module' => 'categories'])</td>
         @endcan
         <td><item-list-position-input :model="model"></item-list-position-input></td>
-        <td>@{{ model.name }}</td>
+        <td>@{{ model.name_translated }}</td>
         <td>
             <span class="fa fa-circle" :style="'color:'+model.color"></span>
             <span class="text-muted">@{{ model.color }}</span>
