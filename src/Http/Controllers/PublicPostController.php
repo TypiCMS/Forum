@@ -54,8 +54,10 @@ class PublicPostController extends Controller
         }
 
         $data['files'] = [];
-        foreach ($request->file('files') as $file) {
-            $data['files'][] = $fileUploader->handle($file, 'workspace');
+        if ($request->has('files')) {
+            foreach ($request->file('files') as $file) {
+                $data['files'][] = $fileUploader->handle($file, 'workspace');
+            }
         }
 
         $newPost = Post::create($data);

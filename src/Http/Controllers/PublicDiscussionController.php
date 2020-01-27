@@ -123,8 +123,10 @@ class PublicDiscussionController extends Controller
         $discussion->users()->attach($userId);
 
         $postData['files'] = [];
-        foreach ($request->file('files') as $file) {
-            $data['files'][] = $fileUploader->handle($file, 'workspace');
+        if ($request->has('files')) {
+            foreach ($request->file('files') as $file) {
+                $postData['files'][] = $fileUploader->handle($file, 'workspace');
+            }
         }
 
         $post = Post::create($postData);
