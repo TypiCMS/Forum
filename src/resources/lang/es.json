@@ -1,6 +1,7 @@
 {
     "1 minute| :count minutes": "1 minuto| :count minutos",
     "All discussions": "Todas las discusiones",
+    "Are you sure you want to delete this <strong>discussion</strong>?": "¿Estás seguro de que quieres borrar la <strong>discusión</strong>?",
     "Are you sure you want to delete this response?": "¿Estás seguro de que quieres borrar la respuesta?",
     "Cancel": "Cancelar",
     "Could not delete the response.": "¡Oh! No se ha podido borrar la respuesta.",
