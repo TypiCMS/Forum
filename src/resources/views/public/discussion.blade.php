@@ -32,7 +32,13 @@
                     @csrf
                     <input type="hidden" name="_method" value="delete">
                     <div class="forum-post-delete-alert-icon"><span class="fa fa-exclamation-triangle fa-fw"></span></div>
-                    <div class="forum-post-delete-alert-message">@lang('Are you sure you want to delete this response?')</div>
+                    <div class="forum-post-delete-alert-message">
+                        @if ($loop->first)
+                            @lang('Are you sure you want to delete this <strong>discussion</strong>?')
+                        @else
+                            @lang('Are you sure you want to delete this response?')
+                        @endif
+                    </div>
                     <button class="forum-post-delete-alert-cancel" type="button">@lang('No thanks')</button>
                     <button class="forum-post-delete-alert-confirm" type="submit">@lang('Yes delete it')</button>
                 </form>
