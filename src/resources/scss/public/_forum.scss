@@ -87,14 +87,9 @@
 }
 
 .forum-post-delete-alert {
-    background: $gray-100;
-    color: $gray-600;
+    @extend .alert;
+    @extend .alert-danger;
     display: none;
-    padding: 12px 30px;
-    margin-bottom: 20px;
-    border-radius: 30px;
-    align-items: center;
-    justify-content: space-between;
     &-icon {
         margin-right: 10px;
         flex-shrink: 0;
