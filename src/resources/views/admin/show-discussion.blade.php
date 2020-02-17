@@ -33,7 +33,7 @@
         <li class="card mb-4 @if ($post->deleted_at !== null) text-muted @endif">
             <div class="card-header">
                 <strong>{{ $post->user->first_name }} {{ $post->user->last_name }}</strong> <small class="text-muted">{{ $post->created_at }}</small>
-                @if ($post->deleted_at !== null) <small class="text-danger">@lang('deleted')</small> @endif
+                @empty(!$post->deleted_at) <small class="text-danger">@lang('deleted')</small> @endempty
             </div>
             <div class="card-body">
                 {!! $post->body !!}
