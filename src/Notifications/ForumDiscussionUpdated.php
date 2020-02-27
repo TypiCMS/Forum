@@ -14,8 +14,6 @@ class ForumDiscussionUpdated extends Notification
 
     /**
      * Create a new notification instance.
-     *
-     * @return void
      */
     public function __construct($discussion)
     {
@@ -60,7 +58,6 @@ class ForumDiscussionUpdated extends Notification
     public function toArray($notifiable)
     {
         return [
-            //
         ];
     }
 }
