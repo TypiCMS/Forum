@@ -16,12 +16,8 @@ class ModuleProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->mergeConfigFrom(
-            __DIR__.'/../config/config.php', 'typicms'
-        );
-        $this->mergeConfigFrom(
-            __DIR__.'/../config/permissions.php', 'typicms.permissions'
-        );
+        $this->mergeConfigFrom(__DIR__.'/../config/config.php', 'typicms');
+        $this->mergeConfigFrom(__DIR__.'/../config/permissions.php', 'typicms.permissions');
 
         $modules = $this->app['config']['typicms']['modules'];
         $this->app['config']->set('typicms.modules', array_merge(['forum' => ['linkable_to_page']], $modules));
