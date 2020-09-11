@@ -2,7 +2,6 @@
 
 namespace TypiCMS\Modules\Forum\Http\Controllers;
 
-use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Spatie\QueryBuilder\AllowedFilter;
@@ -26,7 +25,7 @@ class CategoriesApiController extends BaseApiController
         return $data;
     }
 
-    protected function updatePartial(Category $category, Request $request): JsonResponse
+    protected function updatePartial(Category $category, Request $request)
     {
         $data = [];
         foreach ($request->all() as $column => $content) {
@@ -40,21 +39,13 @@ class CategoriesApiController extends BaseApiController
         }
 
         foreach ($data as $key => $value) {
-            $category->$key = $value;
+            $category->{$key} = $value;
         }
-        $saved = $category->save();
-
-        return response()->json([
-            'error' => !$saved,
-        ]);
+        $category->save();
     }
 
-    public function destroy(Category $category): JsonResponse
+    public function destroy(Category $category)
     {
-        $deleted = $category->delete();
-
-        return response()->json([
-            'error' => !$deleted,
-        ]);
+        $category->delete();
     }
 }

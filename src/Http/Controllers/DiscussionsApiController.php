@@ -2,7 +2,6 @@
 
 namespace TypiCMS\Modules\Forum\Http\Controllers;
 
-use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Spatie\QueryBuilder\AllowedFilter;
@@ -26,7 +25,7 @@ class DiscussionsApiController extends BaseApiController
         return $data;
     }
 
-    protected function updatePartial(Discussion $discussion, Request $request): JsonResponse
+    protected function updatePartial(Discussion $discussion, Request $request)
     {
         $data = [];
         foreach ($request->all() as $column => $content) {
@@ -40,21 +39,13 @@ class DiscussionsApiController extends BaseApiController
         }
 
         foreach ($data as $key => $value) {
-            $discussion->$key = $value;
+            $discussion->{$key} = $value;
         }
-        $saved = $discussion->save();
-
-        return response()->json([
-            'error' => !$saved,
-        ]);
+        $discussion->save();
     }
 
-    public function destroy(Discussion $discussion): JsonResponse
+    public function destroy(Discussion $discussion)
     {
-        $deleted = $discussion->delete();
-
-        return response()->json([
-            'error' => !$deleted,
-        ]);
+        $discussion->delete();
     }
 }
