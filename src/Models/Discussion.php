@@ -22,7 +22,7 @@ class Discussion extends Base
 
     protected $table = 'forum_discussions';
 
-    protected $guarded = ['id', 'exit'];
+    protected $guarded = [];
 
     protected $dates = ['deleted_at', 'last_reply_at'];
 

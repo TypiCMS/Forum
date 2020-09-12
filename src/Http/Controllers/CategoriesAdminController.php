@@ -31,14 +31,14 @@ class CategoriesAdminController extends BaseAdminController
 
     public function store(CategoryFormRequest $request): RedirectResponse
     {
-        $model = Category::create($request->all());
+        $category = Category::create($request->validated());
 
-        return $this->redirect($request, $model);
+        return $this->redirect($request, $category);
     }
 
     public function update(Category $category, CategoryFormRequest $request): RedirectResponse
     {
-        $category->update($request->all());
+        $category->update($request->validated());
 
         return $this->redirect($request, $category);
     }

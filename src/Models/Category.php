@@ -24,7 +24,7 @@ class Category extends Base implements Sortable
 
     protected $table = 'forum_categories';
 
-    protected $guarded = ['id', 'exit'];
+    protected $guarded = [];
 
     public $translatable = [
         'name',
