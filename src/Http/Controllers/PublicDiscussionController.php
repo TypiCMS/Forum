@@ -145,16 +145,15 @@ class PublicDiscussionController extends Controller
             return redirect()
                 ->route('forum.discussion.showInCategory', [$category->slug, $slug])
                 ->with($forum_alert);
-        } else {
-            $forum_alert = [
-                'forum_alert_type' => 'danger',
-                'forum_alert' => trans('Whoops! There seems to be a problem creating your discussion.'),
-            ];
-
-            return redirect()
-                ->route('forum.discussion.showInCategory', [$category->slug, $slug])
-                ->with($forum_alert);
         }
+        $forum_alert = [
+            'forum_alert_type' => 'danger',
+            'forum_alert' => trans('Whoops! There seems to be a problem creating your discussion.'),
+        ];
+
+        return redirect()
+            ->route('forum.discussion.showInCategory', [$category->slug, $slug])
+            ->with($forum_alert);
     }
 
     private function notEnoughTimeBetweenDiscussion()
@@ -201,10 +200,9 @@ class PublicDiscussionController extends Controller
             $discussion->users()->detach($userId);
 
             return response()->json(0);
-        } else { // otherwise add it
-            $discussion->users()->attach($userId);
+        }   // otherwise add it
+        $discussion->users()->attach($userId);
 
-            return response()->json(1);
-        }
+        return response()->json(1);
     }
 }
