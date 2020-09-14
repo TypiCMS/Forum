@@ -25,25 +25,6 @@ class DiscussionsApiController extends BaseApiController
         return $data;
     }
 
-    protected function updatePartial(Discussion $discussion, Request $request)
-    {
-        $data = [];
-        foreach ($request->all() as $column => $content) {
-            if (is_array($content)) {
-                foreach ($content as $key => $value) {
-                    $data[$column.'->'.$key] = $value;
-                }
-            } else {
-                $data[$column] = $content;
-            }
-        }
-
-        foreach ($data as $key => $value) {
-            $discussion->{$key} = $value;
-        }
-        $discussion->save();
-    }
-
     public function destroy(Discussion $discussion)
     {
         $discussion->delete();

@@ -74,7 +74,6 @@ class RouteServiceProvider extends ServiceProvider
                     $router->delete('forum/categories/{category}', 'CategoriesApiController@destroy')->middleware('can:delete-forum-category');
 
                     $router->get('forum/discussions', 'DiscussionsApiController@index')->middleware('can:see-all-forum-discussions');
-                    $router->patch('forum/discussions/{discussion}', 'DiscussionsApiController@updatePartial')->middleware('can:update-forum-discussion');
                     $router->delete('forum/discussions/{discussion}', 'DiscussionsApiController@destroy')->middleware('can:delete-forum-discussion');
                 });
             });
