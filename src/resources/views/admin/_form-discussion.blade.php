@@ -1,6 +1,8 @@
 @component('core::admin._buttons-form', ['model' => $model])
 @endcomponent
 
+{!! BootForm::hidden('id') !!}
+
 <div class="row">
     <div class="col-md-6">
         {!! BootForm::text(__('Title'), 'title') !!}
