@@ -11,13 +11,13 @@ class SidebarViewComposer
 {
     public function compose(View $view)
     {
-        if (Gate::denies('see-all-forum-categories') && Gate::denies('see-all-forum-discussions')) {
+        if (Gate::denies('read forum_categories') && Gate::denies('read forum_discussions')) {
             return;
         }
         $view->sidebar->group(__('Forum'), function (SidebarGroup $group) {
             $group->id = 'forum';
             $group->weight = 30;
-            if (Gate::allows('see-all-forum-categories')) {
+            if (Gate::allows('read forum_categories')) {
                 $group->addItem(__('Categories'), function (SidebarItem $item) {
                     $item->id = 'forum-categories';
                     $item->icon = config('typicms.forum.categories.sidebar.icon', 'icon fa fa-fw fa-list');
@@ -26,7 +26,7 @@ class SidebarViewComposer
                     $item->append('admin::create-forum-category');
                 });
             }
-            if (Gate::allows('see-all-forum-discussions')) {
+            if (Gate::allows('read forum_discussions')) {
                 $group->addItem(__('Discussions'), function (SidebarItem $item) {
                     $item->id = 'forum-discussions';
                     $item->icon = config('typicms.forum.discussions.sidebar.icon', 'icon fa fa-fw fa-comment-o');

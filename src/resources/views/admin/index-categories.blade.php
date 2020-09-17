@@ -15,7 +15,7 @@
     :sorting="['position']">
 
     <template slot="add-button">
-        @can ('create-forum-category')
+        @can ('create forum_categories')
         <a class="btn btn-primary btn-sm header-btn-add mr-2" href="{{ route('admin::create-forum-category') }}">
             <span class="fa fa-plus text-white-50"></span> @lang('Add')
         </a>
@@ -24,7 +24,7 @@
 
     <template slot="columns" slot-scope="{ sortArray }">
         <item-list-column-header name="checkbox"></item-list-column-header>
-        @can ('delete-forum-category')
+        @can ('delete forum_categories')
         <item-list-column-header name="edit"></item-list-column-header>
         @endcan
         <item-list-column-header name="position" sortable :sort-array="sortArray" :label="$t('Position')"></item-list-column-header>
@@ -34,7 +34,7 @@
 
     <template slot="table-row" slot-scope="{ model, checkedModels, loading }">
         <td class="checkbox"><item-list-checkbox :model="model" :checked-models-prop="checkedModels" :loading="loading"></item-list-checkbox></td>
-        @can ('delete-forum-category')
+        @can ('delete forum_categories')
         <td>@include('core::admin._button-edit', ['module' => 'categories'])</td>
         @endcan
         <td><item-list-position-input :model="model"></item-list-position-input></td>

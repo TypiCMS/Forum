@@ -26,7 +26,7 @@
     <template slot="table-row" slot-scope="{ model, checkedModels, loading }">
         <td class="checkbox"><item-list-checkbox :model="model" :checked-models-prop="checkedModels" :loading="loading"></item-list-checkbox></td>
         <td>
-            @can ('view-forum-discussion')
+            @can ('read forum_discussions')
             <a class="btn btn-light btn-xs" :href="'discussions/'+model.id">@lang('Show')</a>
             @endcan
         <td>@{{ model.last_reply_at }}</td>

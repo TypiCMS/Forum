@@ -2,14 +2,13 @@
 
 return [
     'Forum categories' => [
-        'see-all-forum-categories' => 'View list',
-        'create-forum-category' => 'Create',
-        'update-forum-category' => 'Edit',
-        'delete-forum-category' => 'Delete',
+        'read forum_categories' => 'Read',
+        'create forum_categories' => 'Create',
+        'update forum_categories' => 'Edit',
+        'delete forum_categories' => 'Delete',
     ],
     'Forum discussions' => [
-        'see-all-forum-discussions' => 'View list',
-        'view-forum-discussion' => 'View',
-        'delete-forum-discussion' => 'Delete',
+        'read forum_discussions' => 'Read',
+        'delete forum_discussions' => 'Delete',
     ],
 ];

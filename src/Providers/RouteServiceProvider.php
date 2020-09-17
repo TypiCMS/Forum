@@ -51,17 +51,17 @@ class RouteServiceProvider extends ServiceProvider
              * Admin routes
              */
             $router->middleware('admin')->prefix('admin')->group(function (Router $router) {
-                $router->get('forum/categories', 'CategoriesAdminController@index')->name('admin::index-forum-categories')->middleware('can:see-all-forum-categories');
-                $router->get('forum/categories/create', 'CategoriesAdminController@create')->name('admin::create-forum-category')->middleware('can:create-forum-category');
-                $router->get('forum/categories/{category}/edit', 'CategoriesAdminController@edit')->name('admin::edit-forum-category')->middleware('can:update-forum-category');
-                $router->post('forum/categories', 'CategoriesAdminController@store')->name('admin::store-forum-category')->middleware('can:create-forum-category');
-                $router->put('forum/categories/{category}', 'CategoriesAdminController@update')->name('admin::update-forum-category')->middleware('can:update-forum-category');
+                $router->get('forum/categories', 'CategoriesAdminController@index')->name('admin::index-forum-categories')->middleware('can:read forum_categories');
+                $router->get('forum/categories/create', 'CategoriesAdminController@create')->name('admin::create-forum-category')->middleware('can:create forum_categories');
+                $router->get('forum/categories/{category}/edit', 'CategoriesAdminController@edit')->name('admin::edit-forum-category')->middleware('can:update forum_categories');
+                $router->post('forum/categories', 'CategoriesAdminController@store')->name('admin::store-forum-category')->middleware('can:create forum_categories');
+                $router->put('forum/categories/{category}', 'CategoriesAdminController@update')->name('admin::update-forum-category')->middleware('can:update forum_categories');
 
-                $router->get('forum/discussions', 'DiscussionsAdminController@index')->name('admin::index-forum-discussions')->middleware('can:see-all-forum-discussions');
-                $router->get('forum/discussions/{discussion}', 'DiscussionsAdminController@show')->name('admin::show-forum-discussion')->middleware('can:view-forum-discussion');
-                $router->get('forum/discussions/{discussion}/edit', 'DiscussionsAdminController@edit')->name('admin::edit-forum-discussion')->middleware('can:edit-forum-discussion');
-                $router->post('forum/discussions', 'DiscussionsAdminController@store')->name('admin::store-forum-discussion')->middleware('can:create-forum-discussion');
-                $router->put('forum/discussions/{discussion}', 'DiscussionsAdminController@update')->name('admin::update-forum-discussion')->middleware('can:update-forum-discussion');
+                $router->get('forum/discussions', 'DiscussionsAdminController@index')->name('admin::index-forum-discussions')->middleware('can:read forum_discussions');
+                $router->get('forum/discussions/{discussion}', 'DiscussionsAdminController@show')->name('admin::show-forum-discussion')->middleware('can:read forum_discussions');
+                $router->get('forum/discussions/{discussion}/edit', 'DiscussionsAdminController@edit')->name('admin::edit-forum-discussion')->middleware('can:edit forum_discussions');
+                $router->post('forum/discussions', 'DiscussionsAdminController@store')->name('admin::store-forum-discussion')->middleware('can:create forum_discussions');
+                $router->put('forum/discussions/{discussion}', 'DiscussionsAdminController@update')->name('admin::update-forum-discussion')->middleware('can:update forum_discussions');
             });
 
             /*
@@ -69,12 +69,12 @@ class RouteServiceProvider extends ServiceProvider
              */
             $router->middleware('api')->prefix('api')->group(function (Router $router) {
                 $router->middleware('auth:api')->group(function (Router $router) {
-                    $router->get('forum/categories', 'CategoriesApiController@index')->middleware('can:see-all-forum-categories');
-                    $router->patch('forum/categories/{category}', 'CategoriesApiController@updatePartial')->middleware('can:update-forum-category');
-                    $router->delete('forum/categories/{category}', 'CategoriesApiController@destroy')->middleware('can:delete-forum-category');
+                    $router->get('forum/categories', 'CategoriesApiController@index')->middleware('can:read forum_categories');
+                    $router->patch('forum/categories/{category}', 'CategoriesApiController@updatePartial')->middleware('can:update forum_categories');
+                    $router->delete('forum/categories/{category}', 'CategoriesApiController@destroy')->middleware('can:delete forum_categories');
 
-                    $router->get('forum/discussions', 'DiscussionsApiController@index')->middleware('can:see-all-forum-discussions');
-                    $router->delete('forum/discussions/{discussion}', 'DiscussionsApiController@destroy')->middleware('can:delete-forum-discussion');
+                    $router->get('forum/discussions', 'DiscussionsApiController@index')->middleware('can:read forum_discussions');
+                    $router->delete('forum/discussions/{discussion}', 'DiscussionsApiController@destroy')->middleware('can:delete forum_discussions');
                 });
             });
         });
