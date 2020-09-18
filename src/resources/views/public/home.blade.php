@@ -49,7 +49,7 @@
                     @foreach($discussions as $discussion)
                     <li class="forum-discussion">
                         <a class="forum-discussion-link" href="{{ route('forum.discussion.showInCategory', [$discussion->category->slug, $discussion->slug]) }}">
-                            <div class="forum-discussion-avatar" style="background-color:#<?= \TypiCMS\Modules\Forum\Helpers\ForumHelper::stringToColorCode($discussion->user->first_name); ?>">
+                            <div class="forum-discussion-avatar" style="background-color:#{{ \TypiCMS\Modules\Forum\Helpers\ForumHelper::stringToColorCode($discussion->user->first_name) }}">
                                 {{ strtoupper(substr($discussion->user->first_name, 0, 1)) }}
                             </div>
                             <div class="forum-discussion-content">
