@@ -14,6 +14,8 @@ class ForumDiscussionUpdated extends Notification
 
     /**
      * Create a new notification instance.
+     *
+     * @param mixed $discussion
      */
     public function __construct($discussion)
     {

@@ -93,16 +93,15 @@ class PublicPostController extends Controller
             return redirect()
                 ->route('forum.discussion.showInCategory', [$category->slug, $discussion->slug])
                 ->with($forumAlert);
-        } else {
-            $forumAlert = [
-                'forum_alert_type' => 'danger',
-                'forum_alert' => trans('Sorry, there seems to have been a problem submitting your response.'),
-            ];
-
-            return redirect()
-                ->route('forum.discussion.showInCategory', [$category->slug, $discussion->slug])
-                ->with($forumAlert);
         }
+        $forumAlert = [
+            'forum_alert_type' => 'danger',
+            'forum_alert' => trans('Sorry, there seems to have been a problem submitting your response.'),
+        ];
+
+        return redirect()
+            ->route('forum.discussion.showInCategory', [$category->slug, $discussion->slug])
+            ->with($forumAlert);
     }
 
     public function download(Request $request)
@@ -174,14 +173,13 @@ class PublicPostController extends Controller
             return redirect()
                 ->route('forum.discussion.showInCategory', [$category->slug, $discussion->slug])
                 ->with($forumAlert);
-        } else {
-            $forumAlert = [
-                'forum_alert_type' => 'danger',
-                'forum_alert' => trans('Could not update your response.'),
-            ];
-
-            return redirect()->route('forum.home')->with($forumAlert);
         }
+        $forumAlert = [
+            'forum_alert_type' => 'danger',
+            'forum_alert' => trans('Could not update your response.'),
+        ];
+
+        return redirect()->route('forum.home')->with($forumAlert);
     }
 
     public function destroy(Post $post, Request $request)

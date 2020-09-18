@@ -15,7 +15,7 @@ class ForumHelper
     {
         $code = dechex(crc32($string));
 
-        return substr($code, 0, 6);
+        return mb_substr($code, 0, 6);
     }
 
     /**
@@ -60,11 +60,11 @@ class ForumHelper
      */
     private static function urlParameter($url)
     {
-        $start = strpos($url, '{') + 1;
+        $start = mb_strpos($url, '{') + 1;
 
-        $length = strpos($url, '}') - $start;
+        $length = mb_strpos($url, '}') - $start;
 
-        return substr($url, $start, $length);
+        return mb_substr($url, $start, $length);
     }
 
     /**
@@ -73,6 +73,7 @@ class ForumHelper
      * on the same page.
      *
      * @param HTML string
+     * @param mixed $html
      *
      * @return HTML string
      */
