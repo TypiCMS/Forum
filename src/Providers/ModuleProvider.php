@@ -23,7 +23,10 @@ class ModuleProvider extends ServiceProvider
         $this->app['config']->set('typicms.modules', array_merge(['forum' => ['linkable_to_page']], $modules));
 
         $this->loadViewsFrom(__DIR__.'/../resources/views/', 'forum');
-        $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
+
+        $this->publishes([
+            __DIR__.'/../database/migrations/create_forum_tables.php.stub' => getMigrationFileName('create_forum_tables'),
+        ], 'migrations');
 
         $this->publishes([
             __DIR__.'/../resources/views' => resource_path('views/vendor/forum'),

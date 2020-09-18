@@ -1,0 +1,81 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+
+class CreateForumTables extends Migration
+{
+    public function up()
+    {
+        Schema::create('forum_categories', function (Blueprint $table) {
+            $table->increments('id');
+            $table->unsignedInteger('position');
+            $table->json('name');
+            $table->json('slug');
+            $table->string('color', 7);
+            $table->softDeletes();
+            $table->timestamps();
+        });
+        Schema::create('forum_discussions', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->unsignedInteger('forum_category_id');
+            $table->string('title');
+            $table->string('slug')->unique();
+            $table->unsignedBigInteger('user_id');
+            $table->boolean('sticky')->default(false);
+            $table->unsignedInteger('views')->default(0);
+            $table->boolean('answered')->default(0);
+            $table->timestamp('last_reply_at')->useCurrent();
+            $table->softDeletes();
+            $table->timestamps();
+        });
+        Schema::create('forum_notifications', function (Blueprint $table) {
+            $table->unsignedBigInteger('user_id')->index();
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->unsignedBigInteger('discussion_id')->index();
+            $table->foreign('discussion_id')->references('id')->on('forum_discussions')->onDelete('cascade');
+            $table->primary(['user_id', 'discussion_id']);
+        });
+        Schema::create('forum_posts', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('forum_discussion_id');
+            $table->unsignedBigInteger('user_id');
+            $table->text('body');
+            $table->json('files');
+            $table->softDeletes();
+            $table->timestamps();
+        });
+        Schema::table('forum_discussions', function (Blueprint $table) {
+            $table->foreign('forum_category_id')->references('id')->on('forum_categories')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
+            $table->foreign('user_id')->references('id')->on('users')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
+        });
+        Schema::table('forum_posts', function (Blueprint $table) {
+            $table->foreign('forum_discussion_id')->references('id')->on('forum_discussions')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
+            $table->foreign('user_id')->references('id')->on('users')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
+        });
+    }
+
+    public function down()
+    {
+        Schema::table('forum_discussions', function (Blueprint $table) {
+            $table->dropForeign(['forum_category_id']);
+            $table->dropForeign(['user_id']);
+        });
+        Schema::table('forum_posts', function (Blueprint $table) {
+            $table->dropForeign(['forum_discussion_id']);
+            $table->dropForeign(['user_id']);
+        });
+        Schema::drop('forum_posts');
+        Schema::drop('forum_notifications');
+        Schema::drop('forum_discussions');
+        Schema::drop('forum_categories');
+    }
+}
