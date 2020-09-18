@@ -9,7 +9,7 @@ use Mews\Purifier\PurifierServiceProvider;
 use TypiCMS\Modules\Core\Facades\TypiCMS;
 use TypiCMS\Modules\Forum\Composers\SidebarViewComposer;
 
-class ModuleProvider extends ServiceProvider
+class ModuleServiceProvider extends ServiceProvider
 {
     /**
      * Bootstrap the application services.
