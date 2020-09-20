@@ -15,7 +15,7 @@
     :sorting="['-last_reply_at']">
 
     <template slot="columns" slot-scope="{ sortArray }">
-        <item-list-column-header name="checkbox"></item-list-column-header>
+        <item-list-column-header name="checkbox" v-if="$can('update forum_discussions')||$can('delete forum_discussions')"></item-list-column-header>
         <item-list-column-header name="show"></item-list-column-header>
         <item-list-column-header name="last_reply_at" sortable :sort-array="sortArray" :label="$t('Last reply')"></item-list-column-header>
         <item-list-column-header name="title" sortable :sort-array="sortArray" :label="$t('Title')"></item-list-column-header>
@@ -24,11 +24,8 @@
     </template>
 
     <template slot="table-row" slot-scope="{ model, checkedModels, loading }">
-        <td class="checkbox"><item-list-checkbox :model="model" :checked-models-prop="checkedModels" :loading="loading"></item-list-checkbox></td>
-        <td>
-            @can ('read forum_discussions')
-            <a class="btn btn-light btn-xs" :href="'discussions/'+model.id">@lang('Show')</a>
-            @endcan
+        <td class="checkbox" v-if="$can('update forum_discussions')||$can('delete forum_discussions')"><item-list-checkbox :model="model" :checked-models-prop="checkedModels" :loading="loading"></item-list-checkbox></td>
+        <td><a class="btn btn-light btn-xs" :href="'discussions/'+model.id">@lang('Show')</a></td>
         <td>@{{ model.last_reply_at }}</td>
         <td>@{{ model.title }}</td>
         <td><span class="badge badge-secondary">@{{ model.views }}</span></td>
