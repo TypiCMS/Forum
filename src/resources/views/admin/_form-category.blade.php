@@ -5,19 +5,22 @@
 
 <div class="row">
     <div class="col-md-6">
-        {!! BootForm::text(__('Name'), 'name') !!}
+        {!! TranslatableBootForm::text(__('Name'), 'name') !!}
     </div>
     <div class="col-md-6">
-        <div class="form-group @if ($errors->has('slug'))has-error @endif">
-            {!! Form::label('<span>'.__('Slug').'</span>')->addClass('control-label')->forId('slug') !!}
+        @foreach ($locales as $lang)
+        <div class="form-group form-group-translation @if ($errors->has('slug.'.$lang))has-error @endif">
+            {!! Form::label('<span>'.__('Slug').'</span> <span>('.$lang.')</span>')->addClass('control-label')->forId('slug['.$lang.']') !!}
+            <span></span>
             <div class="input-group">
-                {!! Form::text('slug')->addClass('form-control')->addClass($errors->has('slug') ? 'is-invalid' : '')->id('slug')->data('slug', 'name') !!}
+                {!! Form::text('slug['.$lang.']')->addClass('form-control')->addClass($errors->has('slug.'.$lang) ? 'is-invalid' : '')->id('slug['.$lang.']')->data('slug', 'name['.$lang.']')->data('language', $lang) !!}
                 <span class="input-group-append">
                     <button class="btn btn-outline-secondary btn-slug" type="button">{{ __('Generate') }}</button>
                 </span>
-                {!! $errors->first('slug', '<div class="invalid-feedback">:message</div>') !!}
+                {!! $errors->first('slug.'.$lang, '<div class="invalid-feedback">:message</div>') !!}
             </div>
         </div>
+        @endforeach
     </div>
 </div>
 
