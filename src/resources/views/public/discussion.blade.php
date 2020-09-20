@@ -12,8 +12,8 @@
 
     <div class="forum-header">
         <div class="forum-header-container">
-            <a class="forum-header-back-button" href="{{ route('forum.home') }}"><span class="fa fa-chevron-left fa-fw"></span></a>
-            <h1 class="forum-header-title">{{ $discussion->title }}</h1><span class="forum-header-details"> @lang('Posted in category')<a class="forum-header-category" href="{{ route('forum.category.show', $discussion->category->slug) }}" style="background-color:{{ $discussion->category->color }}">{{ $discussion->category->name }}</a></span>
+            <a class="forum-header-back-button" href="{{ route($lang.'::forum.home') }}"><span class="fa fa-chevron-left fa-fw"></span></a>
+            <h1 class="forum-header-title">{{ $discussion->title }}</h1><span class="forum-header-details"> @lang('Posted in category')<a class="forum-header-category" href="{{ route($lang.'::forum.category.show', $discussion->category->slug) }}" style="background-color:{{ $discussion->category->color }}">{{ $discussion->category->name }}</a></span>
         </div>
     </div>
 
@@ -28,7 +28,7 @@
 
             <li class="forum-post" data-id="{{ $post->id }}">
 
-                <form class="forum-post-delete-alert" action="{{ route('forum.posts.destroy', $post->id) }}" method="post">
+                <form class="forum-post-delete-alert" action="{{ route($lang.'::forum.posts.destroy', $post->id) }}" method="post">
                     @csrf
                     <input type="hidden" name="_method" value="delete">
                     <div class="forum-post-delete-alert-icon"><span class="fa fa-exclamation-triangle fa-fw"></span></div>
@@ -51,7 +51,7 @@
 
                     <div class="forum-post-content">
 
-                        <form class="forum-post-content-form" id="forum-post-form-edit-{{ $post->id }}" action="{{ route('forum.posts.update', $post->id) }}" method="post">
+                        <form class="forum-post-content-form" id="forum-post-form-edit-{{ $post->id }}" action="{{ route($lang.'::forum.posts.update', $post->id) }}" method="post">
                             <input type="hidden" name="_method" value="patch">
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
                             <textarea class="forum-post-content-form-teaxtarea form-control" name="body" id="post-edit-{{ $post->id }}"></textarea>
@@ -80,7 +80,7 @@
                                 <ul class="forum-post-content-files-list">
                                     @foreach ($post->files as $file)
                                     <li class="forum-post-content-files-item">
-                                        <a class="forum-post-content-files-item-link" href="{{ route('forum.file.download', ['file_path' => $file['path']]) }}">
+                                        <a class="forum-post-content-files-item-link" href="{{ route($lang.'::forum.file.download', ['file_path' => $file['path']]) }}">
                                             <span class="forum-post-content-files-item-icon fa fa-file fa-fw"></span>
                                             <span class="forum-post-content-files-item-name">{{ $file['filename'] }}</span>
                                         </a>
@@ -105,7 +105,7 @@
 
         @if(auth()->check())
 
-            <form class="forum-new-post" id="new_response" action="{{ route('forum.posts.store') }}" method="post" enctype="multipart/form-data">
+            <form class="forum-new-post" id="new_response" action="{{ route($lang.'::forum.posts.store') }}" method="post" enctype="multipart/form-data">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                 <input type="hidden" name="forum_discussion_id" value="{{ $discussion->id }}">
 
@@ -159,7 +159,7 @@ $('document').ready(function() {
     $('#email-notification').change(function() {
         var loader = $('#forum-discussion-actions-notification-loader');
         loader.addClass('loading');
-        $.post('{{ route('forum.discussion.email', $discussion->id) }}', { _token: '{{ csrf_token() }}' }, function() {
+        $.post('{{ route($lang.'::forum.discussion.email', $discussion->id) }}', { _token: '{{ csrf_token() }}' }, function() {
             loader.removeClass('loading');
         });
     });

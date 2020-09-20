@@ -12,7 +12,7 @@
 
     <div class="forum-header">
         <div class="forum-header-container">
-            <a class="forum-header-back-button" href="{{ route('forum.home') }}"><span class="fa fa-chevron-left fa-fw"></span></a>
+            <a class="forum-header-back-button" href="{{ route($lang.'::forum.home') }}"><span class="fa fa-chevron-left fa-fw"></span></a>
             <h1 class="forum-header-title">@lang('New discussion')</h1>
         </div>
     </div>
@@ -22,7 +22,7 @@
 
     <div class="forum-container">
 
-        <form action="{{ route('forum.discussion.store') }}" method="post" enctype="multipart/form-data">
+        <form action="{{ route($lang.'::forum.discussion.store') }}" method="post" enctype="multipart/form-data">
             @csrf
             <div class="form-row">
                 <div class="col-md-8">
@@ -60,7 +60,7 @@
                 </div>
             </div>
             <div class="forum-actions">
-                <a href="{{ route('forum.home') }}" class="btn btn-default" id="cancel_discussion">@lang('Cancel')</a>
+                <a href="{{ route($lang.'::forum.home') }}" class="btn btn-default" id="cancel_discussion">@lang('Cancel')</a>
                 <button class="btn btn-success" type="submit" id="submit_discussion"><span class="fa fa-plus-circle fa-fw"></span> @lang('Create discussion')</button>
             </div>
         </form>

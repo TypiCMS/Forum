@@ -77,7 +77,7 @@ class PublicDiscussionController extends Controller
                 ];
 
                 return redirect()
-                    ->route('forum.home')
+                    ->route(app()->getLocale().'::forum.home')
                     ->with($forum_alert)
                     ->withInput();
             }
@@ -143,7 +143,7 @@ class PublicDiscussionController extends Controller
             ];
 
             return redirect()
-                ->route('forum.discussion.showInCategory', [$category->slug, $slug])
+                ->route(app()->getLocale().'::forum.discussion.showInCategory', [$category->slug, $slug])
                 ->with($forum_alert);
         }
         $forum_alert = [
@@ -152,7 +152,7 @@ class PublicDiscussionController extends Controller
         ];
 
         return redirect()
-            ->route('forum.discussion.showInCategory', [$category->slug, $slug])
+            ->route(app()->getLocale().'::forum.discussion.showInCategory', [$category->slug, $slug])
             ->with($forum_alert);
     }
 
@@ -178,7 +178,7 @@ class PublicDiscussionController extends Controller
 
         if ($category !== $discussion_category->slug) {
             return redirect()
-                ->route('forum.discussion.showInCategory', [$discussion_category->slug, $discussion->slug]);
+                ->route(app()->getLocale().'::forum.discussion.showInCategory', [$discussion_category->slug, $discussion->slug]);
         }
 
         $posts = Post::with('user')

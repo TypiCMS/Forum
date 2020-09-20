@@ -17,11 +17,11 @@
         <div class="row">
 
             <div class="forum-sidebar col-md-3">
-                <a class="forum-sidebar-create-button" href="{{ isset($currentCategory) ? route('forum.discussion.createInCategory', $currentCategory->slug) : route('forum.discussion.create') }}" class="btn btn-primary btn-block"><i class="forum-new"></i> @lang('New discussion')</a>
+                <a class="forum-sidebar-create-button" href="{{ isset($currentCategory) ? route($lang.'::forum.discussion.createInCategory', $currentCategory->slug) : route($lang.'::forum.discussion.create') }}" class="btn btn-primary btn-block"><i class="forum-new"></i> @lang('New discussion')</a>
                 @if ($categories->count() > 0)
                 <ul class="forum-sidebar-category-list">
                     <li class="forum-sidebar-category-item forum-sidebar-category-item-all">
-                        <a class="forum-sidebar-category-item-link {{ !isset($currentCategory) ? 'active' : '' }}" href="{{ route('forum.home') }}">
+                        <a class="forum-sidebar-category-item-link {{ !isset($currentCategory) ? 'active' : '' }}" href="{{ route($lang.'::forum.home') }}">
                             <span class="forum-sidebar-category-item-icon">
                                 <span class="fa fa-comment-o fa-fw"></span>
                             </span>
@@ -30,7 +30,7 @@
                     </li>
                     @foreach ($categories as $category)
                     <li class="forum-sidebar-category-item">
-                        <a class="forum-sidebar-category-item-link {{ isset($currentCategory) && $category->slug === $currentCategory->slug ? 'active' : '' }}" href="{{ route('forum.category.show', $category->slug) }}">
+                        <a class="forum-sidebar-category-item-link {{ isset($currentCategory) && $category->slug === $currentCategory->slug ? 'active' : '' }}" href="{{ route($lang.'::forum.category.show', $category->slug) }}">
                             <span class="forum-sidebar-category-item-icon">
                                 <span class="forum-sidebar-category-item-box" style="background-color:{{ $category->color }}"></span>
                             </span>
@@ -48,7 +48,7 @@
                 <ul class="forum-discussion-list">
                     @foreach($discussions as $discussion)
                     <li class="forum-discussion">
-                        <a class="forum-discussion-link" href="{{ route('forum.discussion.showInCategory', [$discussion->category->slug, $discussion->slug]) }}">
+                        <a class="forum-discussion-link" href="{{ route($lang.'::forum.discussion.showInCategory', [$discussion->category->slug, $discussion->slug]) }}">
                             <div class="forum-discussion-avatar" style="background-color:#{{ \TypiCMS\Modules\Forum\Helpers\ForumHelper::stringToColorCode($discussion->user->first_name) }}">
                                 {{ strtoupper(substr($discussion->user->first_name, 0, 1)) }}
                             </div>
