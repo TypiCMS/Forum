@@ -11,6 +11,8 @@ use TypiCMS\Modules\Forum\Http\Controllers\CategoriesApiController;
 use TypiCMS\Modules\Forum\Http\Controllers\DiscussionsAdminController;
 use TypiCMS\Modules\Forum\Http\Controllers\DiscussionsApiController;
 use TypiCMS\Modules\Forum\Http\Controllers\PublicAtomController;
+use TypiCMS\Modules\Forum\Http\Controllers\PublicCategoryController;
+use TypiCMS\Modules\Forum\Http\Controllers\PublicController;
 use TypiCMS\Modules\Forum\Http\Controllers\PublicDiscussionController;
 use TypiCMS\Modules\Forum\Http\Controllers\PublicPostController;
 
@@ -26,22 +28,23 @@ class RouteServiceProvider extends ServiceProvider
              * Front office routes
              */
             if ($page = TypiCMS::getPageLinkedToModule('forum')) {
-                $router->middleware('public')->group(function (Router $router) use ($page) {
-                    $middleware = $page->private ? ['middleware' => 'auth'] : [];
-                    $router->prefix($page->uri())->middleware($middleware)->group(function (Router $router) use ($page) {
-                        $router->get('/', [PublicController::class, 'index'])->name('forum.home');
-                        $router->get('category/{category}', [PublicCategoryController::class, 'show'])->name('forum.category.show');
-                        $router->get('discussion/{category}/{discussion}', [PublicDiscussionController::class, 'show'])->name('forum.discussion.showInCategory');
-                        $router->get('category/{category}/discussion/create', [PublicDiscussionController::class, 'createInCategory'])->name('forum.discussion.createInCategory');
-                        $router->get('discussion/create', [PublicDiscussionController::class, 'create'])->name('forum.discussion.create');
-                        $router->post('discussion', [PublicDiscussionController::class, 'store'])->name('forum.discussion.store');
-                        $router->post('discussion/{discussion}/email', [PublicDiscussionController::class, 'toggleEmailNotification'])->name('forum.discussion.email');
-                        $router->post('posts', [PublicPostController::class, 'store'])->name('forum.posts.store');
-                        $router->get('download', [PublicPostController::class, 'download'])->name('forum.file.download');
-                        $router->patch('posts/{post}', [PublicPostController::class, 'update'])->name('forum.posts.update');
-                        $router->delete('posts/{post}', [PublicPostController::class, 'destroy'])->name('forum.posts.destroy');
-                        $router->get('atom', [PublicAtomController::class, 'index'])->name('forum.atom');
-                    });
+                $middleware = ['public'];
+                if ($page->private) {
+                    $middleware[] = 'auth';
+                }
+                $router->prefix($page->uri())->middleware($middleware)->group(function (Router $router) use ($page) {
+                    $router->get('/', [PublicController::class, 'index'])->name('forum.home');
+                    $router->get('category/{category}', [PublicCategoryController::class, 'show'])->name('forum.category.show');
+                    $router->get('discussion/{category}/{discussion}', [PublicDiscussionController::class, 'show'])->name('forum.discussion.showInCategory');
+                    $router->get('category/{category}/discussion/create', [PublicDiscussionController::class, 'createInCategory'])->name('forum.discussion.createInCategory');
+                    $router->get('discussion/create', [PublicDiscussionController::class, 'create'])->name('forum.discussion.create');
+                    $router->post('discussion', [PublicDiscussionController::class, 'store'])->name('forum.discussion.store');
+                    $router->post('discussion/{discussion}/email', [PublicDiscussionController::class, 'toggleEmailNotification'])->name('forum.discussion.email');
+                    $router->post('posts', [PublicPostController::class, 'store'])->name('forum.posts.store');
+                    $router->get('download', [PublicPostController::class, 'download'])->name('forum.file.download');
+                    $router->patch('posts/{post}', [PublicPostController::class, 'update'])->name('forum.posts.update');
+                    $router->delete('posts/{post}', [PublicPostController::class, 'destroy'])->name('forum.posts.destroy');
+                    $router->get('atom', [PublicAtomController::class, 'index'])->name('forum.atom');
                 });
             }
 
