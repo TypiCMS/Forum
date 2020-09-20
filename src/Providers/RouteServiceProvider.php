@@ -23,62 +23,58 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function map()
     {
-        Route::namespace($this->namespace)->group(function (Router $router) {
-            /*
-             * Front office routes
-             */
-            if ($page = TypiCMS::getPageLinkedToModule('forum')) {
-                $middleware = $page->private ? ['public', 'auth'] : ['public'];
-                foreach (locales() as $lang) {
-                    if ($page->translate('status', $lang) && $uri = $page->uri($lang)) {
-                        $router->prefix($uri)->middleware($middleware)->group(function (Router $router) use ($page, $lang) {
-                            $router->get('/', [PublicController::class, 'index'])->name($lang.'::forum.home');
-                            $router->get('category/{category}', [PublicCategoryController::class, 'show'])->name($lang.'::forum.category.show');
-                            $router->get('discussion/{category}/{discussion}', [PublicDiscussionController::class, 'show'])->name($lang.'::forum.discussion.showInCategory');
-                            $router->get('category/{category}/discussion/create', [PublicDiscussionController::class, 'createInCategory'])->name($lang.'::forum.discussion.createInCategory');
-                            $router->get('discussion/create', [PublicDiscussionController::class, 'create'])->name($lang.'::forum.discussion.create');
-                            $router->post('discussion', [PublicDiscussionController::class, 'store'])->name($lang.'::forum.discussion.store');
-                            $router->post('discussion/{discussion}/email', [PublicDiscussionController::class, 'toggleEmailNotification'])->name($lang.'::forum.discussion.email');
-                            $router->post('posts', [PublicPostController::class, 'store'])->name($lang.'::forum.posts.store');
-                            $router->get('download', [PublicPostController::class, 'download'])->name($lang.'::forum.file.download');
-                            $router->patch('posts/{post}', [PublicPostController::class, 'update'])->name($lang.'::forum.posts.update');
-                            $router->delete('posts/{post}', [PublicPostController::class, 'destroy'])->name($lang.'::forum.posts.destroy');
-                            $router->get('atom', [PublicAtomController::class, 'index'])->name($lang.'::forum.atom');
-                        });
-                    }
+        /*
+         * Front office routes
+         */
+        if ($page = TypiCMS::getPageLinkedToModule('forum')) {
+            $middleware = $page->private ? ['public', 'auth'] : ['public'];
+            foreach (locales() as $lang) {
+                if ($page->isPublished($lang) && $uri = $page->uri($lang)) {
+                    Route::middleware($middleware)->prefix($uri)->name($lang.'::')->group(function (Router $router) {
+                        $router->get('/', [PublicController::class, 'index'])->name('forum.home');
+                        $router->get('category/{category}', [PublicCategoryController::class, 'show'])->name('forum.category.show');
+                        $router->get('discussion/{category}/{discussion}', [PublicDiscussionController::class, 'show'])->name('forum.discussion.showInCategory');
+                        $router->get('category/{category}/discussion/create', [PublicDiscussionController::class, 'createInCategory'])->name('forum.discussion.createInCategory');
+                        $router->get('discussion/create', [PublicDiscussionController::class, 'create'])->name('forum.discussion.create');
+                        $router->post('discussion', [PublicDiscussionController::class, 'store'])->name('forum.discussion.store');
+                        $router->post('discussion/{discussion}/email', [PublicDiscussionController::class, 'toggleEmailNotification'])->name('forum.discussion.email');
+                        $router->post('posts', [PublicPostController::class, 'store'])->name('forum.posts.store');
+                        $router->get('download', [PublicPostController::class, 'download'])->name('forum.file.download');
+                        $router->patch('posts/{post}', [PublicPostController::class, 'update'])->name('forum.posts.update');
+                        $router->delete('posts/{post}', [PublicPostController::class, 'destroy'])->name('forum.posts.destroy');
+                        $router->get('atom', [PublicAtomController::class, 'index'])->name('forum.atom');
+                    });
                 }
             }
+        }
 
-            /*
-             * Admin routes
-             */
-            $router->middleware('admin')->prefix('admin')->group(function (Router $router) {
-                $router->get('forum/categories', [CategoriesAdminController::class, 'index'])->name('admin::index-forum-categories')->middleware('can:read forum_categories');
-                $router->get('forum/categories/create', [CategoriesAdminController::class, 'create'])->name('admin::create-forum-category')->middleware('can:create forum_categories');
-                $router->get('forum/categories/{category}/edit', [CategoriesAdminController::class, 'edit'])->name('admin::edit-forum-category')->middleware('can:update forum_categories');
-                $router->post('forum/categories', [CategoriesAdminController::class, 'store'])->name('admin::store-forum-category')->middleware('can:create forum_categories');
-                $router->put('forum/categories/{category}', [CategoriesAdminController::class, 'update'])->name('admin::update-forum-category')->middleware('can:update forum_categories');
+        /*
+         * Admin routes
+         */
+        Route::middleware('admin')->prefix('admin')->name('admin::')->group(function (Router $router) {
+            $router->get('forum/categories', [CategoriesAdminController::class, 'index'])->name('index-forum-categories')->middleware('can:read forum_categories');
+            $router->get('forum/categories/create', [CategoriesAdminController::class, 'create'])->name('create-forum-category')->middleware('can:create forum_categories');
+            $router->get('forum/categories/{category}/edit', [CategoriesAdminController::class, 'edit'])->name('edit-forum-category')->middleware('can:update forum_categories');
+            $router->post('forum/categories', [CategoriesAdminController::class, 'store'])->name('store-forum-category')->middleware('can:create forum_categories');
+            $router->put('forum/categories/{category}', [CategoriesAdminController::class, 'update'])->name('update-forum-category')->middleware('can:update forum_categories');
 
-                $router->get('forum/discussions', [DiscussionsAdminController::class, 'index'])->name('admin::index-forum-discussions')->middleware('can:read forum_discussions');
-                $router->get('forum/discussions/{discussion}', [DiscussionsAdminController::class, 'show'])->name('admin::show-forum-discussion')->middleware('can:read forum_discussions');
-                $router->get('forum/discussions/{discussion}/edit', [DiscussionsAdminController::class, 'edit'])->name('admin::edit-forum-discussion')->middleware('can:edit forum_discussions');
-                $router->post('forum/discussions', [DiscussionsAdminController::class, 'store'])->name('admin::store-forum-discussion')->middleware('can:create forum_discussions');
-                $router->put('forum/discussions/{discussion}', [DiscussionsAdminController::class, 'update'])->name('admin::update-forum-discussion')->middleware('can:update forum_discussions');
-            });
+            $router->get('forum/discussions', [DiscussionsAdminController::class, 'index'])->name('index-forum-discussions')->middleware('can:read forum_discussions');
+            $router->get('forum/discussions/{discussion}', [DiscussionsAdminController::class, 'show'])->name('show-forum-discussion')->middleware('can:read forum_discussions');
+            $router->get('forum/discussions/{discussion}/edit', [DiscussionsAdminController::class, 'edit'])->name('edit-forum-discussion')->middleware('can:edit forum_discussions');
+            $router->post('forum/discussions', [DiscussionsAdminController::class, 'store'])->name('store-forum-discussion')->middleware('can:create forum_discussions');
+            $router->put('forum/discussions/{discussion}', [DiscussionsAdminController::class, 'update'])->name('update-forum-discussion')->middleware('can:update forum_discussions');
+        });
 
-            /*
-             * API routes
-             */
-            $router->middleware('api')->prefix('api')->group(function (Router $router) {
-                $router->middleware('auth:api')->group(function (Router $router) {
-                    $router->get('forum/categories', [CategoriesApiController::class, 'index'])->middleware('can:read forum_categories');
-                    $router->patch('forum/categories/{category}', [CategoriesApiController::class, 'updatePartial'])->middleware('can:update forum_categories');
-                    $router->delete('forum/categories/{category}', [CategoriesApiController::class, 'destroy'])->middleware('can:delete forum_categories');
+        /*
+         * API routes
+         */
+        Route::middleware(['api', 'auth:api'])->prefix('api')->group(function (Router $router) {
+            $router->get('forum/categories', [CategoriesApiController::class, 'index'])->middleware('can:read forum_categories');
+            $router->patch('forum/categories/{category}', [CategoriesApiController::class, 'updatePartial'])->middleware('can:update forum_categories');
+            $router->delete('forum/categories/{category}', [CategoriesApiController::class, 'destroy'])->middleware('can:delete forum_categories');
 
-                    $router->get('forum/discussions', [DiscussionsApiController::class, 'index'])->middleware('can:read forum_discussions');
-                    $router->delete('forum/discussions/{discussion}', [DiscussionsApiController::class, 'destroy'])->middleware('can:delete forum_discussions');
-                });
-            });
+            $router->get('forum/discussions', [DiscussionsApiController::class, 'index'])->middleware('can:read forum_discussions');
+            $router->delete('forum/discussions/{discussion}', [DiscussionsApiController::class, 'destroy'])->middleware('can:delete forum_discussions');
         });
     }
 }
