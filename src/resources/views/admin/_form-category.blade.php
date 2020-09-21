@@ -3,7 +3,7 @@
 
 {!! BootForm::hidden('id') !!}
 
-<div class="row">
+<div class="form-row">
     <div class="col-md-6">
         {!! TranslatableBootForm::text(__('Name'), 'name') !!}
     </div>
