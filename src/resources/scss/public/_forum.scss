@@ -65,17 +65,16 @@
             margin-right: 10px;
             border-radius: 50%;
             padding: 0px;
-            background: rgba(0, 0, 0, 0.2);
-            width: 34px;
-            height: 34px;
+            background: rgba($white, 0.4);
+            width: 2rem;
+            height: 2rem;
             flex-shrink: 0;
-            text-align: center;
-            color: rgba(255, 255, 255, 0.8);
+            margin-right: 0.5rem;
+            mask-repeat: no-repeat;
+            mask-image: url('data:image/svg+xml,<svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-4.5.5a.5.5 0 0 0 0-1H5.707l2.147-2.146a.5.5 0 1 0-.708-.708l-3 3a.5.5 0 0 0 0 .708l3 3a.5.5 0 0 0 .708-.708L5.707 8.5H11.5z"/></svg>');
             &:hover,
             &:focus {
-                text-decoration: none;
-                background: rgba(0, 0, 0, 0.4);
-                color: $white;
+                background: rgba($white, 0.7);
             }
         }
     }
@@ -93,10 +92,17 @@
     &-icon {
         margin-right: 10px;
         flex-shrink: 0;
+        width: 1.125rem;
+        height: 1.125rem;
+        background-color: $danger;
+        mask-repeat: no-repeat;
+        mask-image: url('data:image/svg+xml,<svg viewBox="0 0 16 16" class="bi bi-exclamation-circle-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8 4a.905.905 0 0 0-.9.995l.35 3.507a.552.552 0 0 0 1.1 0l.35-3.507A.905.905 0 0 0 8 4zm.002 6a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"/></svg>');
     }
     &-message {
         margin-right: 10px;
         flex-grow: 1;
+        align-items: center;
+        display: flex;
     }
     &-cancel {
         @extend .btn;
@@ -165,6 +171,12 @@
     &-count {
         flex-shrink: 0;
         color: $gray-500;
+        align-self: flex-start;
+        display: flex;
+        align-items: center;
+        &-icon {
+            margin-right: 0.5rem;
+        }
     }
 }
 
@@ -187,6 +199,26 @@
         flex-grow: 1;
         &-form {
             display: none;
+            &-cancel {
+                @extend .btn;
+                @extend .btn-light;
+                margin-right: 0.5rem;
+            }
+            &-submit {
+                @extend .btn;
+                @extend .btn-success;
+                display: flex;
+                align-items: center;
+                &-icon {
+                    display: inline-block;
+                    width: 1.125rem;
+                    height: 1.125rem;
+                    margin-right: 0.5rem;
+                    background-color: $white;
+                    mask-repeat: no-repeat;
+                    mask-image: url('data:image/svg+xml,<svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/></svg>');
+                }
+            }
         }
         &-info {
             display: flex;
@@ -235,8 +267,12 @@
                     }
                 }
                 &-icon {
-                    color: $green;
                     margin-right: 0.25rem;
+                    width: 0.85rem;
+                    height: 0.85rem;
+                    background-color: $green;
+                    mask-repeat: no-repeat;
+                    mask-image: url('data:image/svg+xml,<svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.707A1 1 0 0 0 13.707 4L10 .293A1 1 0 0 0 9.293 0H4zm5.5 1.5v2a1 1 0 0 0 1 1h2l-3-3z"/></svg>');
                 }
                 &-name {
                     line-height: 1;
@@ -258,8 +294,21 @@
             text-transform: none;
             font-weight: normal;
             white-space: nowrap;
-            .fa {
-                color: $gray-500;
+            display: inline-flex;
+            align-items: center;
+            &-icon {
+                margin-right: 0.25rem;
+                display: inline-block;
+                width: 0.75rem;
+                height: 0.75rem;
+                background-color: $gray-500;
+                mask-repeat: no-repeat;
+            }
+            &-pencil {
+                mask-image: url('data:image/svg+xml,<svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"/></svg>');
+            }
+            &-trash {
+                mask-image: url('data:image/svg+xml,<svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5a.5.5 0 0 0-1 0v7a.5.5 0 0 0 1 0v-7z"/></svg>');
             }
         }
     }
@@ -287,15 +336,34 @@
     justify-content: flex-end;
     align-items: center;
     flex-wrap: wrap;
+    &-button-submit {
+        @extend .btn;
+        @extend .btn-success;
+        display: flex;
+        align-items: center;
+        &-icon {
+            display: inline-block;
+            width: 1.125rem;
+            height: 1.125rem;
+            margin-right: 0.5rem;
+            background-color: $white;
+            mask-repeat: no-repeat;
+            mask-image: url('data:image/svg+xml,<svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z"/></svg>');
+        }
+    }
     &-notification {
         border-radius: 30px;
         width: auto;
         padding: 0 2rem;
         background: $gray-100;
-        font-size: 1.25rem;
+        font-size: 0.85rem;
         margin: 0 10px 0 0;
-        color: $gray-500;
+        color: $gray-700;
         line-height: 2.125rem;
+        & .custom-control-label:after,
+        & .custom-control-label:before {
+            margin-top: 5px;
+        }
         &-loader {
             display: none;
             position: relative;
@@ -332,9 +400,6 @@
     &-editor {
         flex-grow: 1;
         margin-top: 0.5rem;
-        label {
-            font-size: 1.25rem;
-        }
     }
 }
 

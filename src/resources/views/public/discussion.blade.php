@@ -12,7 +12,9 @@
 
     <div class="forum-header">
         <div class="forum-header-container">
-            <a class="forum-header-back-button" href="{{ route($lang.'::forum.home') }}"><span class="fa fa-chevron-left fa-fw"></span></a>
+            <a class="forum-header-back-button" href="{{ route($lang.'::forum.home') }}">
+                <span class="sr-only">@lang('Back')</span>
+            </a>
             <h1 class="forum-header-title">{{ $discussion->title }}</h1><span class="forum-header-details"> @lang('Posted in category')<a class="forum-header-category" href="{{ route($lang.'::forum.category.show', $discussion->category->slug) }}" style="background-color:{{ $discussion->category->color }}">{{ $discussion->category->name }}</a></span>
         </div>
     </div>
@@ -31,8 +33,8 @@
                 <form class="forum-post-delete-alert" action="{{ route($lang.'::forum.posts.destroy', $post->id) }}" method="post">
                     @csrf
                     <input type="hidden" name="_method" value="delete">
-                    <div class="forum-post-delete-alert-icon"><span class="fa fa-exclamation-triangle fa-fw"></span></div>
                     <div class="forum-post-delete-alert-message">
+                        <div class="forum-post-delete-alert-icon"></div>
                         @if ($loop->first)
                             @lang('Are you sure you want to delete this <strong>discussion</strong>?')
                         @else
@@ -56,8 +58,10 @@
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
                             <textarea class="forum-post-content-form-teaxtarea form-control" name="body" id="post-edit-{{ $post->id }}"></textarea>
                             <div class="forum-post-content-form-actions forum-actions">
-                                <button class="forum-post-content-form-cancel btn btn-default" type="button" href="/" data-id="{{ $post->id }}">@lang('Cancel')</button>
-                                <button class="forum-post-content-form-submit btn btn-success" type="submit" data-id="{{ $post->id }}"><span class="fa fa-check-circle fa-fw"></span> @lang('Update response')</button>
+                                <button class="forum-post-content-form-cancel" type="button" href="/" data-id="{{ $post->id }}">@lang('Cancel')</button>
+                                <button class="forum-post-content-form-submit" type="submit" data-id="{{ $post->id }}">
+                                    <span class="forum-post-content-form-submit-icon"></span> @lang('Update response')
+                                </button>
                             </div>
                         </form>
 
@@ -69,8 +73,14 @@
                                 </span>
                                 @if(!Auth::guest() && (Auth::user()->id == $post->user->id))
                                 <div class="forum-post-actions">
-                                    <button class="forum-post-actions-button forum-post-actions-edit-button" type="button"><span class="fa fa-pencil fa-fw"></span> @lang('Edit')</button>
-                                    <button class="forum-post-actions-button forum-post-actions-delete-button" type="button"><span class="fa fa-trash fa-fw"></span> @lang('Delete')</button>
+                                    <button class="forum-post-actions-button forum-post-actions-edit-button" type="button">
+                                        <span class="forum-post-actions-button-icon forum-post-actions-button-pencil"></span>
+                                        @lang('Edit')
+                                    </button>
+                                    <button class="forum-post-actions-button forum-post-actions-delete-button" type="button">
+                                        <span class="forum-post-actions-button-icon forum-post-actions-button-trash"></span>
+                                        @lang('Delete')
+                                    </button>
                                 </div>
                                 @endif
                             </div>
@@ -81,7 +91,7 @@
                                     @foreach ($post->files as $file)
                                     <li class="forum-post-content-files-item">
                                         <a class="forum-post-content-files-item-link" href="{{ route($lang.'::forum.file.download', ['file_path' => $file['path']]) }}">
-                                            <span class="forum-post-content-files-item-icon fa fa-file fa-fw"></span>
+                                            <span class="forum-post-content-files-item-icon"></span>
                                             <span class="forum-post-content-files-item-name">{{ $file['filename'] }}</span>
                                         </a>
                                     </li>
@@ -125,7 +135,9 @@
                     <div class="forum-discussion-actions forum-actions">
                         @if (config('typicms.forum.email.enabled'))
                             <div class="forum-discussion-actions-notification forum-actions-notification">
-                                <img class="forum-discussion-actions-notification-loader forum-actions-notification-loader" src="{{ url('img/loading.gif') }}" id="forum-discussion-actions-notification-loader">
+                                <div class="forum-actions-notification-loader spinner-border spinner-border-sm"  id="forum-discussion-actions-notification-loader" role="status">
+                                    <span class="sr-only">@lang('Loading…')</span>
+                                </div>
                                 <div class="custom-control custom-switch">
                                     <input type="checkbox" class="custom-control-input" id="email-notification" name="email-notification" @if(!Auth::guest() && $discussion->users->contains(Auth::user()->id)){{ 'checked' }}@endif>
                                     <label class="custom-control-label" for="email-notification">@lang('Notify me when someone replies.')</label>

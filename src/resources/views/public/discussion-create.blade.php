@@ -12,7 +12,9 @@
 
     <div class="forum-header">
         <div class="forum-header-container">
-            <a class="forum-header-back-button" href="{{ route($lang.'::forum.home') }}"><span class="fa fa-chevron-left fa-fw"></span></a>
+            <a class="forum-header-back-button" href="{{ route($lang.'::forum.home') }}">
+                <span class="sr-only">@lang('Back')</span>
+            </a>
             <h1 class="forum-header-title">@lang('New discussion')</h1>
         </div>
     </div>
@@ -60,8 +62,11 @@
                 </div>
             </div>
             <div class="forum-actions">
-                <a href="{{ route($lang.'::forum.home') }}" class="btn btn-default" id="cancel_discussion">@lang('Cancel')</a>
-                <button class="btn btn-success" type="submit" id="submit_discussion"><span class="fa fa-plus-circle fa-fw"></span> @lang('Create discussion')</button>
+                <a class="btn btn-light mr-2" href="{{ route($lang.'::forum.home') }}" id="cancel_discussion">@lang('Cancel')</a>
+                <button class="forum-actions-button-submit" type="submit" id="submit_discussion">
+                    <span class="forum-actions-button-submit-icon"></span>
+                    @lang('Create discussion')
+                </button>
             </div>
         </form>
 
