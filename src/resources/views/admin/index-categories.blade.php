@@ -15,9 +15,7 @@
     :sorting="['position']">
 
     <template slot="add-button" v-if="$can('create forum_categories')">
-        <a class="btn btn-primary btn-sm header-btn-add mr-2" href="{{ route('admin::create-forum-category') }}">
-            <span class="fa fa-plus text-white-50"></span> @lang('Add')
-        </a>
+        @include('core::admin._button-create', ['url' => route('admin::create-forum-category')])
     </template>
 
     <template slot="columns" slot-scope="{ sortArray }">
