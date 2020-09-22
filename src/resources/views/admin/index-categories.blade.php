@@ -34,7 +34,7 @@
         <td><item-list-position-input :model="model"></item-list-position-input></td>
         <td>@{{ model.name_translated }}</td>
         <td>
-            <span class="fa fa-circle" :style="'color:'+model.color"></span>
+            <span :style="'color:'+model.color">●</span>
             <span class="text-muted">@{{ model.color }}</span>
         </td>
     </template>
