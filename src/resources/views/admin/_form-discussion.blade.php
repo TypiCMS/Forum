@@ -3,12 +3,12 @@
 
 {!! BootForm::hidden('id') !!}
 
-<div class="form-row">
+<div class="row gx-3">
     <div class="col-md-6">
         {!! BootForm::text(__('Title'), 'title') !!}
     </div>
     <div class="col-md-6">
-        <div class="form-group @if ($errors->has('slug'))has-error @endif">
+        <div class="mb-3 @if ($errors->has('slug'))has-error @endif">
             {!! Form::label('<span>'.__('Slug').'</span>')->addClass('control-label')->forId('slug') !!}
             <div class="input-group">
                 {!! Form::text('slug')->addClass('form-control')->addClass($errors->has('slug') ? 'is-invalid' : '')->id('slug')->data('slug', 'title') !!}

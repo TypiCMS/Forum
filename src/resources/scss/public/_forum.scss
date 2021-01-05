@@ -150,7 +150,7 @@
         }
         &-category {
             @extend .badge;
-            @extend .badge-info;
+            @extend .bg-info;
             border-radius: 0.25rem;
             font-size: 0.85rem;
             font-weight: bold;
@@ -406,7 +406,6 @@
 .forum-sidebar {
     &-create-button {
         @extend .btn;
-        @extend .btn-block;
         @extend .btn-primary;
         margin-bottom: 2rem;
     }

@@ -13,7 +13,7 @@
     <div class="forum-header">
         <div class="forum-header-container">
             <a class="forum-header-back-button" href="{{ route($lang.'::forum.home') }}">
-                <span class="sr-only">@lang('Back')</span>
+                <span class="visually-hidden">@lang('Back')</span>
             </a>
             <h1 class="forum-header-title">{{ $discussion->title }}</h1><span class="forum-header-details"> @lang('Posted in category')<a class="forum-header-category" href="{{ route($lang.'::forum.category.show', $discussion->category->slug) }}" style="background-color:{{ $discussion->category->color }}">{{ $discussion->category->name }}</a></span>
         </div>
@@ -124,11 +124,11 @@
                 </div>
 
                 <div class="forum-new-post-editor" id="editor">
-                    <div class="form-group">
+                    <div class="mb-3">
                         <label for="body">@lang('Type your response here…')</label>
                         <textarea class="form-control ckeditor-forum" id="body" name="body" placeholder="">{{ old('body') }}</textarea>
                     </div>
-                    <div class="form-group">
+                    <div class="mb-3">
                         <label for="files">Documents</label>
                         <input class="form-control-file" type="file" name="files[]" id="files" multiple="multiple">
                     </div>
@@ -136,7 +136,7 @@
                         @if (config('typicms.forum.email.enabled'))
                             <div class="forum-discussion-actions-notification forum-actions-notification">
                                 <div class="forum-actions-notification-loader spinner-border spinner-border-sm"  id="forum-discussion-actions-notification-loader" role="status">
-                                    <span class="sr-only">@lang('Loading…')</span>
+                                    <span class="visually-hidden">@lang('Loading…')</span>
                                 </div>
                                 <div class="custom-control custom-switch">
                                     <input type="checkbox" class="custom-control-input" id="email-notification" name="email-notification" @if(!Auth::guest() && $discussion->users->contains(Auth::user()->id)){{ 'checked' }}@endif>

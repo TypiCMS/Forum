@@ -3,13 +3,13 @@
 
 {!! BootForm::hidden('id') !!}
 
-<div class="form-row">
+<div class="row gx-3">
     <div class="col-md-6">
         {!! TranslatableBootForm::text(__('Name'), 'name') !!}
     </div>
     <div class="col-md-6">
         @foreach ($locales as $lang)
-        <div class="form-group form-group-translation @if ($errors->has('slug.'.$lang))has-error @endif">
+        <div class="mb-3 form-group-translation @if ($errors->has('slug.'.$lang))has-error @endif">
             {!! Form::label('<span>'.__('Slug').'</span> <span>('.$lang.')</span>')->addClass('control-label')->forId('slug['.$lang.']') !!}
             <span></span>
             <div class="input-group">
