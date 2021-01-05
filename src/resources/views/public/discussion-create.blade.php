@@ -29,14 +29,14 @@
             <div class="row gx-3">
                 <div class="col-md-8">
                     <div class="mb-3">
-                        <label for="title">@lang('Title')</label>
-                        <input type="text" class="form-control" id="title" name="title" value="{{ old('title') }}" required>
+                        <label class="form-label" for="title">@lang('Title')</label>
+                        <input class="form-control" type="text" id="title" name="title" value="{{ old('title') }}" required>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="mb-3">
-                        <label for="forum_category_id">@lang('Category')</label>
-                        <select id="forum_category_id" class="form-control custom-select" name="forum_category_id" required>
+                        <label class="form-label" for="forum_category_id">@lang('Category')</label>
+                        <select class="form-control custom-select" id="forum_category_id" name="forum_category_id" required>
                             <option value=""></option>
                             @foreach($categories as $category)
                                 @if(old('forum_category_id') == $category->id)
@@ -53,11 +53,11 @@
             </div>
             <div class="mb-3">
                 <div class="mb-3">
-                    <label for="body">@lang('Type your discussion here…')</label>
-                    <textarea id="body" class="form-control ckeditor-forum" name="body">{{ old('body') }}</textarea>
+                    <label class="form-label" for="body">@lang('Type your discussion here…')</label>
+                    <textarea class="form-control ckeditor-forum" id="body" name="body">{{ old('body') }}</textarea>
                 </div>
                 <div class="mb-3">
-                    <label for="files">Documents</label>
+                    <label class="form-label" for="files">Documents</label>
                     <input class="form-control-file" type="file" name="files[]" id="files" multiple="multiple">
                 </div>
             </div>

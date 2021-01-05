@@ -125,22 +125,22 @@
 
                 <div class="forum-new-post-editor" id="editor">
                     <div class="mb-3">
-                        <label for="body">@lang('Type your response here…')</label>
+                        <label class="form-label" for="body">@lang('Type your response here…')</label>
                         <textarea class="form-control ckeditor-forum" id="body" name="body" placeholder="">{{ old('body') }}</textarea>
                     </div>
                     <div class="mb-3">
-                        <label for="files">Documents</label>
+                        <label class="form-label" for="files">Documents</label>
                         <input class="form-control-file" type="file" name="files[]" id="files" multiple="multiple">
                     </div>
                     <div class="forum-discussion-actions forum-actions">
                         @if (config('typicms.forum.email.enabled'))
                             <div class="forum-discussion-actions-notification forum-actions-notification">
-                                <div class="forum-actions-notification-loader spinner-border spinner-border-sm"  id="forum-discussion-actions-notification-loader" role="status">
+                                <div class="forum-actions-notification-loader spinner-border spinner-border-sm" id="forum-discussion-actions-notification-loader" role="status">
                                     <span class="visually-hidden">@lang('Loading…')</span>
                                 </div>
-                                <div class="custom-control custom-switch">
-                                    <input type="checkbox" class="custom-control-input" id="email-notification" name="email-notification" @if(!Auth::guest() && $discussion->users->contains(Auth::user()->id)){{ 'checked' }}@endif>
-                                    <label class="custom-control-label" for="email-notification">@lang('Notify me when someone replies.')</label>
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" id="email-notification" name="email-notification" @if(!Auth::guest() && $discussion->users->contains(Auth::user()->id)){{ 'checked' }}@endif>
+                                    <label class="form-check-label" for="email-notification">@lang('Notify me when someone replies.')</label>
                                 </div>
                             </div>
                         @endif
