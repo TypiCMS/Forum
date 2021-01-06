@@ -354,27 +354,19 @@
         }
     }
     &-notification {
+        position: relative;
         border-radius: 30px;
         width: auto;
-        padding: 0 2rem;
+        padding: 0.25rem 2rem;
         background: $gray-100;
-        font-size: 0.85rem;
         margin: 0 10px 0 0;
-        color: $gray-700;
-        line-height: 2.125rem;
-        & .custom-control-label:after,
-        & .custom-control-label:before {
-            margin-top: 5px;
-        }
         &-loader {
             display: none;
-            position: relative;
-            top: 0;
-            left: -24px;
+            position: absolute;
+            top: 9px;
+            left: 9px;
             &.loading {
                 display: block;
-                float: left;
-                top: 9px;
             }
         }
     }
