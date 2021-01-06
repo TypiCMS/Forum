@@ -54,8 +54,10 @@
             color: $white;
             padding: 5px 10px;
             margin-left: 10px;
-            &:hover {
-                text-decoration: none;
+            text-decoration: none;
+            &:hover,
+            &:focus {
+                color: $white;
             }
         }
         &-back-button {
@@ -126,6 +128,7 @@
 }
 .forum-discussion {
     &-link {
+        text-decoration: none;
         display: flex;
         justify-content: space-between;
         padding: 1rem 1rem 0.5rem;
@@ -133,7 +136,6 @@
         border-top: 1px solid $gray-200;
         &:hover,
         &:focus {
-            text-decoration: none;
             background-color: $gray-100;
         }
     }
@@ -255,13 +257,13 @@
                 font-size: 0.85rem;
                 display: inline-block;
                 &-link {
+                    text-decoration: none;
                     background-color: $gray-100;
                     color: $gray-900;
                     display: inline-flex;
                     padding: 0.2rem;
                     &:hover,
                     &:focus {
-                        text-decoration: none;
                         background-color: $gray-200;
                         color: $gray-900;
                     }
@@ -419,6 +421,7 @@
             margin-bottom: 1rem;
         }
         &-link {
+            text-decoration: none;
             color: $gray-500;
             padding: 10px 0 10px 15px;
             display: flex;
@@ -427,7 +430,6 @@
             &.active,
             &:hover,
             &:focus {
-                text-decoration: none;
                 background-color: $gray-100;
                 color: $gray-900;
             }
