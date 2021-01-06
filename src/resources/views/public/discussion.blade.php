@@ -153,7 +153,7 @@
         @else
 
             <p class="forum-login-message">
-                <a href="{{ route($lang.'.login') }}">@lang('Please log in to post.')</a>
+                <a href="{{ route($lang.'::login') }}">@lang('Please log in to post.')</a>
             </p>
 
         @endif
