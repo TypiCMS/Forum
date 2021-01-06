@@ -9,12 +9,10 @@
     </div>
     <div class="col-md-6">
         <div class="mb-3 @if ($errors->has('slug'))has-error @endif">
-            {!! Form::label('<span>'.__('Slug').'</span>')->addClass('control-label')->forId('slug') !!}
+            {!! Form::label('<span>'.__('Slug').'</span>')->addClass('form-label')->forId('slug') !!}
             <div class="input-group">
                 {!! Form::text('slug')->addClass('form-control')->addClass($errors->has('slug') ? 'is-invalid' : '')->id('slug')->data('slug', 'title') !!}
-                <span class="input-group-append">
-                    <button class="btn btn-outline-secondary btn-slug" type="button">{{ __('Generate') }}</button>
-                </span>
+                <button class="btn btn-outline-secondary btn-slug" type="button">{{ __('Generate') }}</button>
                 {!! $errors->first('slug', '<div class="invalid-feedback">:message</div>') !!}
             </div>
         </div>
