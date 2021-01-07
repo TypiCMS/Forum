@@ -36,7 +36,7 @@
                 <div class="col-md-4">
                     <div class="form-group">
                         <label for="forum_category_id">@lang('Category')</label>
-                        <select id="forum_category_id" class="form-control custom-select" name="forum_category_id" required>
+                        <select id="forum_category_id" class="form-control" name="forum_category_id" required>
                             <option value=""></option>
                             @foreach($categories as $category)
                                 @if(old('forum_category_id') == $category->id)
