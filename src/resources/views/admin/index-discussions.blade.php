@@ -28,7 +28,7 @@
         <td><a class="btn btn-light btn-xs" :href="'discussions/'+model.id">@lang('Show')</a></td>
         <td>@{{ model.last_reply_at }}</td>
         <td>@{{ model.title }}</td>
-        <td><span class="badge badge-secondary">@{{ model.views }}</span></td>
+        <td><span class="badge bg-secondary">@{{ model.views }}</span></td>
         <td>@{{ model.forum_category_id }}</td>
     </template>
 
