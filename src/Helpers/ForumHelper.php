@@ -72,10 +72,9 @@ class ForumHelper
      * this will help with SEO so there are not multiple H1 tags
      * on the same page.
      *
-     * @param HTML string
-     * @param mixed $html
+     * @param string $html
      *
-     * @return HTML string
+     * @return string
      */
     public static function demoteHtmlHeaderTags($html)
     {
