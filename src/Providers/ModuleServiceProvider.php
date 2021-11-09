@@ -3,6 +3,7 @@
 namespace TypiCMS\Modules\Forum\Providers;
 
 use Illuminate\Foundation\AliasLoader;
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 use Mews\Purifier\Facades\Purifier;
 use Mews\Purifier\PurifierServiceProvider;
@@ -14,13 +15,12 @@ class ModuleServiceProvider extends ServiceProvider
     /**
      * Bootstrap the application services.
      */
-    public function boot()
+    public function boot(): void
     {
         $this->mergeConfigFrom(__DIR__.'/../config/config.php', 'typicms');
         $this->mergeConfigFrom(__DIR__.'/../config/permissions.php', 'typicms.permissions');
 
-        $modules = $this->app['config']['typicms']['modules'];
-        $this->app['config']->set('typicms.modules', array_merge(['forum' => ['linkable_to_page']], $modules));
+        config(['typicms.modules.forum' => ['linkable_to_page']]);
 
         $this->loadViewsFrom(__DIR__.'/../../resources/views/', 'forum');
 
@@ -40,26 +40,21 @@ class ModuleServiceProvider extends ServiceProvider
             __DIR__.'/../../public' => public_path(),
         ], 'public');
 
-        /*
-         * Sidebar view composer
-         */
-        $this->app->view->composer('core::admin._sidebar', SidebarViewComposer::class);
+        View::composer('core::admin._sidebar', SidebarViewComposer::class);
 
         /*
          * Add the page in the view.
          */
-        $this->app->view->composer('forum::public.*', function ($view) {
+        View::composer('forum::public.*', function ($view) {
             $view->page = TypiCMS::getPageLinkedToModule('forum');
         });
     }
 
-    public function register()
+    public function register(): void
     {
-        $app = $this->app;
+        $this->app->register(RouteServiceProvider::class);
 
-        $app->register(RouteServiceProvider::class);
-
-        $app->register(PurifierServiceProvider::class);
+        $this->app->register(PurifierServiceProvider::class);
 
         AliasLoader::getInstance()->alias('Purifier', Purifier::class);
     }

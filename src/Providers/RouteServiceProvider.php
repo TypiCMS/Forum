@@ -18,7 +18,7 @@ use TypiCMS\Modules\Forum\Http\Controllers\PublicPostController;
 
 class RouteServiceProvider extends ServiceProvider
 {
-    public function map()
+    public function map(): void
     {
         /*
          * Front office routes
