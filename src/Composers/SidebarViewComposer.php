@@ -20,8 +20,8 @@ class SidebarViewComposer
             if (Gate::allows('read forum_categories')) {
                 $group->addItem(__('Categories'), function (SidebarItem $item) {
                     $item->id = 'forum-categories';
-                    $item->icon = config('typicms.forum_categories.sidebar.icon');
-                    $item->weight = config('typicms.forum_categories.sidebar.weight');
+                    $item->icon = config('typicms.modules.forum_categories.sidebar.icon');
+                    $item->weight = config('typicms.modules.forum_categories.sidebar.weight');
                     $item->route('admin::index-forum-categories');
                     $item->append('admin::create-forum-category');
                 });
@@ -29,8 +29,8 @@ class SidebarViewComposer
             if (Gate::allows('read forum_discussions')) {
                 $group->addItem(__('Discussions'), function (SidebarItem $item) {
                     $item->id = 'forum-discussions';
-                    $item->icon = config('typicms.forum_discussions.sidebar.icon');
-                    $item->weight = config('typicms.forum_discussions.sidebar.weight');
+                    $item->icon = config('typicms.modules.forum_discussions.sidebar.icon');
+                    $item->weight = config('typicms.modules.forum_discussions.sidebar.weight');
                     $item->route('admin::index-forum-discussions');
                 });
             }

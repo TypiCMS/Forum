@@ -9,8 +9,8 @@ use Spatie\EloquentSortable\Sortable;
 use Spatie\EloquentSortable\SortableTrait;
 use Spatie\Translatable\HasTranslations;
 use TypiCMS\Modules\Core\Models\Base;
+use TypiCMS\Modules\Core\Traits\Historable;
 use TypiCMS\Modules\Forum\Presenters\CategoryPresenter;
-use TypiCMS\Modules\History\Traits\Historable;
 
 class Category extends Base implements Sortable
 {
