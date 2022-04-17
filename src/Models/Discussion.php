@@ -8,9 +8,9 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Laracasts\Presenter\PresentableTrait;
 use TypiCMS\Modules\Core\Models\Base;
+use TypiCMS\Modules\Core\Models\User;
 use TypiCMS\Modules\Core\Traits\Historable;
 use TypiCMS\Modules\Forum\Presenters\DiscussionPresenter;
-use TypiCMS\Modules\Users\Models\User;
 
 class Discussion extends Base
 {

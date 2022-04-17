@@ -5,7 +5,7 @@ namespace TypiCMS\Modules\Forum\Models;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use TypiCMS\Modules\Core\Models\Base;
-use TypiCMS\Modules\Users\Models\User;
+use TypiCMS\Modules\Core\Models\User;
 
 class Post extends Base
 {
