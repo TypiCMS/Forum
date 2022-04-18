@@ -10,7 +10,7 @@ A forum with categories, discussions and posts. Currently in Beta.
 4. Run `php artisan migrate`
 5. Publish the blade views and the scss file: `php artisan vendor:publish --provider="TypiCMS\Modules\Forum\Providers\ModuleServiceProvider"`
 6. Add `@import 'public/forum';` in `resources/scss/public.scss`
-7. Publish translations `php artisan translations:add vendor/typicms/forum/src/resources/lang`
+7. Publish translations `php artisan translations:add vendor/typicms/forum/src/lang`
 8. run `npm run dev`
 9. Go to the admin side of you TypiCMS project (/admin)
 10. Create some forum categories.
