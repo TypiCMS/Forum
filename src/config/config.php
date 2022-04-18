@@ -1,8 +1,8 @@
 <?php
 
 return [
-    'linkable_to_page' => true,
     'forum' => [
+        'linkable_to_page' => true,
         'soft_deletes' => true,
         'disk' => 'local',
         'security' => [
