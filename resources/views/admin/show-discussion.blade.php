@@ -4,12 +4,12 @@
 
 @section('content')
 
-    <div class="header">
-        @include('core::admin._button-back', ['module' => 'discussions', 'url' => route('admin::index-forum-discussions')])
-        <h1 class="header-title @if (!$model->present()->title)text-muted @endif">
-            {{ $model->present()->title ?: __('Untitled') }}
-        </h1>
-    </div>
+<div class="header">
+    @include('core::admin._button-back', ['url' => $model->indexUrl(), 'title' => __('Discussions')])
+    @include('core::admin._title', ['default' => __('New discussion')])
+</div>
+
+<div class="content">
     <table class="table table-sm">
         <tbody>
             <tr>
@@ -42,5 +42,6 @@
         @endforeach
     </ul>
     @endif
+</div>
 
 @endsection
