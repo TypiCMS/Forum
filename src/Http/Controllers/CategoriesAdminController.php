@@ -33,13 +33,15 @@ class CategoriesAdminController extends BaseAdminController
     {
         $category = Category::create($request->validated());
 
-        return $this->redirect($request, $category);
+        return $this->redirect($request, $category)
+            ->withMessage(__('Item successfully created.'));
     }
 
     public function update(Category $category, CategoryFormRequest $request): RedirectResponse
     {
         $category->update($request->validated());
 
-        return $this->redirect($request, $category);
+        return $this->redirect($request, $category)
+            ->withMessage(__('Item successfully updated.'));
     }
 }
