@@ -2,7 +2,7 @@
 
 namespace TypiCMS\Modules\Forum\Http\Controllers;
 
-use Illuminate\Routing\Controller as Controller;
+use Illuminate\Routing\Controller;
 use TypiCMS\Modules\Forum\Models\Category;
 use TypiCMS\Modules\Forum\Models\Discussion;
 
@@ -11,10 +11,10 @@ class PublicController extends Controller
     public function index()
     {
         $discussions = Discussion::with([
-                'user',
-                'posts',
-                'category',
-            ])
+            'user',
+            'posts',
+            'category',
+        ])
             ->has('posts')
             ->order()
             ->paginate(config('typicms.forum.per_page'));

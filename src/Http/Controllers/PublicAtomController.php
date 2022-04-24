@@ -3,7 +3,7 @@
 namespace TypiCMS\Modules\Forum\Http\Controllers;
 
 use Carbon\Carbon;
-use Illuminate\Routing\Controller as Controller;
+use Illuminate\Routing\Controller;
 use SimpleXMLElement;
 use TypiCMS\Modules\Forum\Models\Discussion;
 
