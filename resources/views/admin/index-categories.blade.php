@@ -27,9 +27,7 @@
 
     <template slot="table-row" slot-scope="{ model, checkedModels, loading }">
         <td class="checkbox" v-if="$can('update forum_categories')||$can('delete forum_categories')"><item-list-checkbox :model="model" :checked-models-prop="checkedModels" :loading="loading"></item-list-checkbox></td>
-        <td v-if="$can('update forum_categories')">
-            <a class="btn btn-secondary btn-xs" :href="'categories/'+model.id+'/edit'">@lang('Edit')</a>
-        </td>
+        <td v-if="$can('update forum_categories')"><item-list-edit-button :url="'/admin/categories/'+model.id+'/edit'"></item-list-edit-button></td>
         <td><item-list-position-input :model="model"></item-list-position-input></td>
         <td>@{{ model.name_translated }}</td>
         <td>

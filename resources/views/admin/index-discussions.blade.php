@@ -24,7 +24,7 @@
 
     <template slot="table-row" slot-scope="{ model, checkedModels, loading }">
         <td class="checkbox" v-if="$can('update forum_discussions')||$can('delete forum_discussions')"><item-list-checkbox :model="model" :checked-models-prop="checkedModels" :loading="loading"></item-list-checkbox></td>
-        <td><a class="btn btn-secondary btn-xs" :href="'discussions/'+model.id">@lang('Show')</a></td>
+        <td><item-list-show-button :url="'/admin/discussions/'+model.id"></item-list-show-button></td>
         <td>@{{ model.last_reply_at | datetime }}</td>
         <td>@{{ model.title }}</td>
         <td><span class="badge bg-secondary text-body">@{{ model.views }}</span></td>
