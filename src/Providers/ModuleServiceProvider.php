@@ -22,7 +22,7 @@ class ModuleServiceProvider extends ServiceProvider
         $this->loadViewsFrom(__DIR__.'/../../resources/views/', 'forum');
 
         $this->publishes([__DIR__.'/../../database/migrations/create_forum_tables.php.stub' => getMigrationFileName('create_forum_tables')], 'typicms-migrations');
-        $this->publishes([__DIR__.'/../../resources/views' => resource_path('views/vendor/forum')], 'typicms-views');
+        $this->publishes([__DIR__.'/../../resources/views' => resource_path('views/forum')], 'typicms-views');
 
         $this->publishes([__DIR__.'/../../resources/scss' => resource_path('scss')], 'typicms-resources');
         $this->publishes([__DIR__.'/../../public' => public_path()], 'typicms-public');
