@@ -6,7 +6,6 @@
 
 <item-list
     url-base="/api/forum/categories"
-    locale="{{ config('typicms.content_locale') }}"
     fields="id,position,name,color"
     table="forum_categories"
     title="categories"
