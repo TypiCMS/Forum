@@ -43,11 +43,11 @@ class PublicPostController extends Controller
             return back()->withErrors($validator)->withInput();
         }
 
-        if (config('typicms.forum.security.limit_time_between_posts')) {
+        if (config('typicms.modules.forum.security.limit_time_between_posts')) {
             if ($this->notEnoughTimeBetweenPosts()) {
                 $forumAlert = [
                     'forum_alert_type' => 'danger',
-                    'forum_alert' => trans('In order to prevent spam, please allow at least :minutes minute(s) in between submitting content.', ['minutes' => config('typicms.forum.security.time_between_posts')]),
+                    'forum_alert' => trans('In order to prevent spam, please allow at least :minutes minute(s) in between submitting content.', ['minutes' => config('typicms.modules.forum.security.time_between_posts')]),
                 ];
 
                 return back()->with($forumAlert)->withInput();
@@ -57,7 +57,7 @@ class PublicPostController extends Controller
         $data['files'] = [];
         if ($request->has('files')) {
             foreach ($request->file('files') as $file) {
-                $data['files'][] = $fileUploader->handle($file, 'workspace', config('typicms.forum.disk'));
+                $data['files'][] = $fileUploader->handle($file, 'workspace', config('typicms.modules.forum.disk'));
             }
         }
 
@@ -80,7 +80,7 @@ class PublicPostController extends Controller
             }
 
             // if email notifications are enabled
-            if (config('typicms.forum.email.enabled')) {
+            if (config('typicms.modules.forum.email.enabled')) {
                 // Send email notifications about new post
                 $this->sendEmailNotifications($newPost->discussion);
             }
@@ -108,18 +108,18 @@ class PublicPostController extends Controller
     {
         $filePath = $request->input('file_path');
 
-        if (!Storage::disk(config('typicms.forum.disk'))->has($filePath)) {
+        if (!Storage::disk(config('typicms.modules.forum.disk'))->has($filePath)) {
             abort(404);
         }
 
-        return Storage::disk(config('typicms.forum.disk'))->download($filePath);
+        return Storage::disk(config('typicms.modules.forum.disk'))->download($filePath);
     }
 
     private function notEnoughTimeBetweenPosts()
     {
         $user = Auth::user();
 
-        $past = Carbon::now()->subMinutes(config('typicms.forum.security.time_between_posts'));
+        $past = Carbon::now()->subMinutes(config('typicms.modules.forum.security.time_between_posts'));
 
         $lastPost = Post::where('user_id', '=', $user->id)->where('created_at', '>=', $past)->first();
 
@@ -194,7 +194,7 @@ class PublicPostController extends Controller
         }
 
         if ($post->discussion->posts()->oldest()->first()->id === $post->id) {
-            if (config('typicms.forum.soft_deletes')) {
+            if (config('typicms.modules.forum.soft_deletes')) {
                 $post->discussion->posts()->delete();
                 $post->discussion()->delete();
             } else {
@@ -210,7 +210,7 @@ class PublicPostController extends Controller
                 ]);
         }
 
-        if (config('typicms.forum.soft_deletes')) {
+        if (config('typicms.modules.forum.soft_deletes')) {
             $post->delete();
         } else {
             $post->forceDelete();

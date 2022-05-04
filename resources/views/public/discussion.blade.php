@@ -133,7 +133,7 @@
                         <input class="form-control-file" type="file" name="files[]" id="files" multiple="multiple">
                     </div>
                     <div class="forum-discussion-actions forum-actions">
-                        @if (config('typicms.forum.email.enabled'))
+                        @if (config('typicms.modules.forum.email.enabled'))
                             <div class="forum-discussion-actions-notification forum-actions-notification">
                                 <div class="forum-actions-notification-loader spinner-border spinner-border-sm" id="forum-discussion-actions-notification-loader" role="status">
                                     <span class="visually-hidden">@lang('Loading…')</span>

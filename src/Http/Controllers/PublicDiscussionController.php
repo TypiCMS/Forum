@@ -69,11 +69,11 @@ class PublicDiscussionController extends Controller
 
         $userId = Auth::user()->id;
 
-        if (config('typicms.forum.security.limit_time_between_posts')) {
+        if (config('typicms.modules.forum.security.limit_time_between_posts')) {
             if ($this->notEnoughTimeBetweenDiscussion()) {
                 $forum_alert = [
                     'forum_alert_type' => 'danger',
-                    'forum_alert' => trans('In order to prevent spam, please allow at least :minutes minute(s) in between submitting content.', ['minutes' => config('typicms.forum.security.time_between_posts')]),
+                    'forum_alert' => trans('In order to prevent spam, please allow at least :minutes minute(s) in between submitting content.', ['minutes' => config('typicms.modules.forum.security.time_between_posts')]),
                 ];
 
                 return redirect()
@@ -125,7 +125,7 @@ class PublicDiscussionController extends Controller
         $postData['files'] = [];
         if ($request->has('files')) {
             foreach ($request->file('files') as $file) {
-                $postData['files'][] = $fileUploader->handle($file, 'workspace', config('typicms.forum.disk'));
+                $postData['files'][] = $fileUploader->handle($file, 'workspace', config('typicms.modules.forum.disk'));
             }
         }
 
@@ -160,7 +160,7 @@ class PublicDiscussionController extends Controller
     {
         $user = Auth::user();
 
-        $past = Carbon::now()->subMinutes(config('typicms.forum.security.time_between_posts'));
+        $past = Carbon::now()->subMinutes(config('typicms.modules.forum.security.time_between_posts'));
 
         $last_discussion = Discussion::where('user_id', $user->id)->where('created_at', '>=', $past)->first();
 

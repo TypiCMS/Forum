@@ -22,7 +22,7 @@ class PublicCategoryController extends Controller
 
         $discussionsQuery = $discussionsQuery->where('forum_category_id', $currentCategory->id);
 
-        $discussions = $discussionsQuery->paginate(config('typicms.forum.per_page'));
+        $discussions = $discussionsQuery->paginate(config('typicms.modules.forum.per_page'));
 
         $categories = Category::order()->get();
 

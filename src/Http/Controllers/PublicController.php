@@ -17,7 +17,7 @@ class PublicController extends Controller
         ])
             ->has('posts')
             ->order()
-            ->paginate(config('typicms.forum.per_page'));
+            ->paginate(config('typicms.modules.forum.per_page'));
 
         $categories = Category::order()->get();
 
