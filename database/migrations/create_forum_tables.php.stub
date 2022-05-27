@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Query\Expression;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
@@ -11,8 +12,8 @@ class CreateForumTables extends Migration
         Schema::create('forum_categories', function (Blueprint $table) {
             $table->id();
             $table->unsignedInteger('position');
-            $table->json('name');
-            $table->json('slug');
+            $table->json('name')->default(new Expression('(JSON_OBJECT())'));
+            $table->json('slug')->default(new Expression('(JSON_OBJECT())'));
             $table->string('color', 7);
             $table->softDeletes();
             $table->timestamps();
@@ -42,7 +43,7 @@ class CreateForumTables extends Migration
             $table->unsignedBigInteger('forum_discussion_id');
             $table->unsignedBigInteger('user_id');
             $table->text('body');
-            $table->json('files');
+            $table->json('files')->default(new Expression('(JSON_OBJECT())'));
             $table->softDeletes();
             $table->timestamps();
         });
