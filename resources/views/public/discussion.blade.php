@@ -26,7 +26,7 @@
 
         <ul class="forum-post-list">
 
-            @foreach($posts as $post)
+            @foreach ($posts as $post)
 
             <li class="forum-post" data-id="{{ $post->id }}">
 
@@ -71,7 +71,7 @@
                                     <span class="forum-post-content-info-name">{{ $post->user->first_name.' '.$post->user->last_name }}</span>
                                     <span class="forum-post-content-info-date">{{ \Carbon\Carbon::createFromTimeStamp(strtotime($post->created_at))->diffForHumans() }}</span>
                                 </span>
-                                @if(!Auth::guest() && (Auth::user()->id == $post->user->id))
+                                @if (!Auth::guest() && (Auth::user()->id == $post->user->id))
                                 <div class="forum-post-actions">
                                     <button class="forum-post-actions-button forum-post-actions-edit-button" type="button">
                                         <span class="forum-post-actions-button-icon forum-post-actions-button-pencil"></span>
@@ -113,7 +113,7 @@
 
         {{ $posts->links() }}
 
-        @if(auth()->check())
+        @if (auth()->check())
 
             <form class="forum-new-post" id="new_response" action="{{ route($lang.'::forum.posts.store') }}" method="post" enctype="multipart/form-data">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
@@ -139,7 +139,7 @@
                                     <span class="visually-hidden">@lang('Loading…')</span>
                                 </div>
                                 <div class="form-check form-switch">
-                                    <input class="form-check-input" type="checkbox" id="email-notification" name="email-notification" @if(!Auth::guest() && $discussion->users->contains(Auth::user()->id)){{ 'checked' }}@endif>
+                                    <input class="form-check-input" type="checkbox" id="email-notification" name="email-notification" @if (!Auth::guest() && $discussion->users->contains(Auth::user()->id)){{ 'checked' }}@endif>
                                     <label class="form-check-label" for="email-notification">@lang('Notify me when someone replies.')</label>
                                 </div>
                             </div>

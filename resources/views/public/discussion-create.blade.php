@@ -38,8 +38,8 @@
                         <label class="form-label" for="forum_category_id">@lang('Category')</label>
                         <select class="form-control custom-select" id="forum_category_id" name="forum_category_id" required>
                             <option value=""></option>
-                            @foreach($categories as $category)
-                                @if(old('forum_category_id') == $category->id)
+                            @foreach ($categories as $category)
+                                @if (old('forum_category_id') == $category->id)
                                     <option value="{{ $category->id }}" selected>{{ $category->name }}</option>
                                 @elseif(!empty($currentCategory) && $currentCategory->id === $category->id)
                                     <option value="{{ $category->id }}" selected>{{ $category->name }}</option>
