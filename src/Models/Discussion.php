@@ -24,7 +24,10 @@ class Discussion extends Base
 
     protected $guarded = [];
 
-    protected $dates = ['deleted_at', 'last_reply_at'];
+    protected $casts = [
+        'deleted_at' => 'datetime',
+        'last_reply_at' => 'array',
+    ];
 
     public function user(): BelongsTo
     {

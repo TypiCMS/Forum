@@ -20,9 +20,8 @@ class Post extends Base
         'files',
     ];
 
-    protected $dates = ['deleted_at'];
-
     protected $casts = [
+        'deleted_at' => 'datetime',
         'files' => 'array',
     ];
 
