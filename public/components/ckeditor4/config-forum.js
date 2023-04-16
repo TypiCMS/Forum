@@ -8,7 +8,7 @@ var editorConfig = {
     entities: false,
     height: 240,
     contentsCss: ['/css/public.css', '/components/ckeditor4/custom.css'],
-    language: $('html').attr('lang'),
+    language: document.documentElement.getAttribute('lang'),
     stylesSet: [],
     extraPlugins: ['codemirror'],
     removePlugins: 'elementspath',
