@@ -26,7 +26,7 @@ class Category extends Base implements Sortable
 
     protected $guarded = [];
 
-    public $translatable = [
+    public array $translatable = [
         'name',
         'slug',
     ];
