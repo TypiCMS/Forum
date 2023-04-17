@@ -35,7 +35,7 @@
     "Successfully created a new discussion.": "Se ha creado correctamente una nueva discusión.",
     "Successfully deleted the response and discussion.": "Se ha borrado correctamente la respuesta y la discusión.",
     "Successfully deleted the response from the discussion.": "Se ha borrado correctamente la respuesta de la discusión.",
-    "Successfully updated the discussion.":  "Discusión actualizada correctamente.",
+    "Successfully updated the discussion.": "Discusión actualizada correctamente.",
     "The content has to have at least :min characters.": "El contenido debe tener al menos :min caracteres.",
     "The title has to have at least :min characters.": "El título debe tener al menos :min caracteres.",
     "The title has to have no more than :max characters.": "El título no debe superar los :max caracteres.",
