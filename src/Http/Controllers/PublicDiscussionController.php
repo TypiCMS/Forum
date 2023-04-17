@@ -73,7 +73,10 @@ class PublicDiscussionController extends Controller
             if ($this->notEnoughTimeBetweenDiscussion()) {
                 $forum_alert = [
                     'forum_alert_type' => 'danger',
-                    'forum_alert' => trans('In order to prevent spam, please allow at least :minutes minute(s) in between submitting content.', ['minutes' => config('typicms.modules.forum.security.time_between_posts')]),
+                    'forum_alert' => trans(
+                        'In order to prevent spam, please allow at least :minutes minute(s) in between submitting content.',
+                        ['minutes' => config('typicms.modules.forum.security.time_between_posts')]
+                    ),
                 ];
 
                 return redirect()

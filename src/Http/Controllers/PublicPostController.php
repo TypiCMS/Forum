@@ -47,7 +47,10 @@ class PublicPostController extends Controller
             if ($this->notEnoughTimeBetweenPosts()) {
                 $forumAlert = [
                     'forum_alert_type' => 'danger',
-                    'forum_alert' => trans('In order to prevent spam, please allow at least :minutes minute(s) in between submitting content.', ['minutes' => config('typicms.modules.forum.security.time_between_posts')]),
+                    'forum_alert' => trans(
+                        'In order to prevent spam, please allow at least :minutes minute(s) in between submitting content.',
+                        ['minutes' => config('typicms.modules.forum.security.time_between_posts')]
+                    ),
                 ];
 
                 return back()->with($forumAlert)->withInput();
