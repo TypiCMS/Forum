@@ -31,7 +31,7 @@
             </td>
             <td>@{{ model.last_reply_at | datetime }}</td>
             <td>@{{ model.title }}</td>
-            <td><span class="badge bg-secondary text-body">@{{ model.views }}</span></td>
+            <td><span class="badge bg-secondary">@{{ model.views }}</span></td>
             <td>@{{ model.forum_category_id }}</td>
         </template>
 
