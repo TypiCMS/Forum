@@ -27,7 +27,7 @@ class PublicAtomController extends Controller
         $link->addAttribute('rel', 'self');
         $link->addAttribute('href', route('forum.atom'));
 
-        $xml->addChild('title', config('app.name').' Discussions');
+        $xml->addChild('title', config('app.name') . ' Discussions');
 
         $updated = count($discussions) ? Carbon::parse($discussions[0]->created_at) : Carbon::now();
 

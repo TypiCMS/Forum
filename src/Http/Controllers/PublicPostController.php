@@ -91,7 +91,7 @@ class PublicPostController extends Controller
             ];
 
             return redirect()
-                ->route(app()->getLocale().'::forum.discussion.showInCategory', [$category->slug, $discussion->slug])
+                ->route(app()->getLocale() . '::forum.discussion.showInCategory', [$category->slug, $discussion->slug])
                 ->with($forumAlert);
         }
         $forumAlert = [
@@ -100,7 +100,7 @@ class PublicPostController extends Controller
         ];
 
         return redirect()
-            ->route(app()->getLocale().'::forum.discussion.showInCategory', [$category->slug, $discussion->slug])
+            ->route(app()->getLocale() . '::forum.discussion.showInCategory', [$category->slug, $discussion->slug])
             ->with($forumAlert);
     }
 
@@ -171,7 +171,7 @@ class PublicPostController extends Controller
             ];
 
             return redirect()
-                ->route(app()->getLocale().'::forum.discussion.showInCategory', [$category->slug, $discussion->slug])
+                ->route(app()->getLocale() . '::forum.discussion.showInCategory', [$category->slug, $discussion->slug])
                 ->with($forumAlert);
         }
         $forumAlert = [
@@ -179,14 +179,14 @@ class PublicPostController extends Controller
             'forum_alert' => trans('Could not update your response.'),
         ];
 
-        return redirect()->route(app()->getLocale().'::forum.home')->with($forumAlert);
+        return redirect()->route(app()->getLocale() . '::forum.home')->with($forumAlert);
     }
 
     public function destroy(Post $post, Request $request)
     {
         if ($request->user()->id !== (int) $post->user_id) {
             return redirect()
-                ->route(app()->getLocale().'::forum.home')
+                ->route(app()->getLocale() . '::forum.home')
                 ->with([
                     'forum_alert_type' => 'danger',
                     'forum_alert' => trans('Could not delete the response.'),
@@ -203,7 +203,7 @@ class PublicPostController extends Controller
             }
 
             return redirect()
-                ->route(app()->getLocale().'::forum.home')
+                ->route(app()->getLocale() . '::forum.home')
                 ->with([
                     'forum_alert_type' => 'success',
                     'forum_alert' => trans('Successfully deleted the response and discussion.'),
@@ -217,7 +217,7 @@ class PublicPostController extends Controller
         }
 
         return redirect()
-            ->route(app()->getLocale().'::forum.discussion.showInCategory', [$post->discussion->category->slug, $post->discussion->slug])
+            ->route(app()->getLocale() . '::forum.discussion.showInCategory', [$post->discussion->category->slug, $post->discussion->slug])
             ->with([
                 'forum_alert_type' => 'success',
                 'forum_alert' => trans('Successfully deleted the response from the discussion.'),

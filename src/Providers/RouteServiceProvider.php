@@ -27,7 +27,7 @@ class RouteServiceProvider extends ServiceProvider
             $middleware = $page->private ? ['public', 'auth'] : ['public'];
             foreach (locales() as $lang) {
                 if ($page->isPublished($lang) && $uri = $page->uri($lang)) {
-                    Route::middleware($middleware)->prefix($uri)->name($lang.'::')->group(function (Router $router) {
+                    Route::middleware($middleware)->prefix($uri)->name($lang . '::')->group(function (Router $router) {
                         $router->get('/', [PublicController::class, 'index'])->name('forum.home');
                         $router->get('category/{category}', [PublicCategoryController::class, 'show'])->name('forum.category.show');
                         $router->get('discussion/{category}/{discussion}', [PublicDiscussionController::class, 'show'])->name('forum.discussion.showInCategory');

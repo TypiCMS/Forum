@@ -77,7 +77,7 @@ class PublicDiscussionController extends Controller
                 ];
 
                 return redirect()
-                    ->route(app()->getLocale().'::forum.home')
+                    ->route(app()->getLocale() . '::forum.home')
                     ->with($forum_alert)
                     ->withInput();
             }
@@ -90,7 +90,7 @@ class PublicDiscussionController extends Controller
         $incrementer = 1;
         $newSlug = $slug;
         while (isset($discussionExists->id)) {
-            $newSlug = $slug.'-'.$incrementer;
+            $newSlug = $slug . '-' . $incrementer;
             $discussionExists = Discussion::where('slug', $newSlug)->withTrashed()->first();
             ++$incrementer;
         }
@@ -143,7 +143,7 @@ class PublicDiscussionController extends Controller
             ];
 
             return redirect()
-                ->route(app()->getLocale().'::forum.discussion.showInCategory', [$category->slug, $slug])
+                ->route(app()->getLocale() . '::forum.discussion.showInCategory', [$category->slug, $slug])
                 ->with($forum_alert);
         }
         $forum_alert = [
@@ -152,7 +152,7 @@ class PublicDiscussionController extends Controller
         ];
 
         return redirect()
-            ->route(app()->getLocale().'::forum.discussion.showInCategory', [$category->slug, $slug])
+            ->route(app()->getLocale() . '::forum.discussion.showInCategory', [$category->slug, $slug])
             ->with($forum_alert);
     }
 
@@ -178,7 +178,7 @@ class PublicDiscussionController extends Controller
 
         if ($category !== $discussion_category->slug) {
             return redirect()
-                ->route(app()->getLocale().'::forum.discussion.showInCategory', [$discussion_category->slug, $discussion->slug]);
+                ->route(app()->getLocale() . '::forum.discussion.showInCategory', [$discussion_category->slug, $discussion->slug]);
         }
 
         $posts = Post::with('user')
