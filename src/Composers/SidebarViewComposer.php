@@ -9,7 +9,7 @@ use Maatwebsite\Sidebar\SidebarItem;
 
 class SidebarViewComposer
 {
-    public function compose(View $view)
+    public function compose(View $view): void
     {
         if (Gate::denies('read forum_categories') && Gate::denies('read forum_discussions')) {
             return;
