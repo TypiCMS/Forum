@@ -5,9 +5,8 @@ use Illuminate\Database\Query\Expression;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateForumTables extends Migration
-{
-    public function up()
+return new class() extends Migration {
+    public function up(): void
     {
         Schema::create('forum_categories', function (Blueprint $table) {
             $table->id();
@@ -65,7 +64,7 @@ class CreateForumTables extends Migration
         });
     }
 
-    public function down()
+    public function down(): void
     {
         Schema::table('forum_discussions', function (Blueprint $table) {
             $table->dropForeign(['forum_category_id']);
@@ -80,4 +79,4 @@ class CreateForumTables extends Migration
         Schema::drop('forum_discussions');
         Schema::drop('forum_categories');
     }
-}
+};
