@@ -20,7 +20,7 @@ class Category extends Base implements Sortable
     use PresentableTrait;
     use SortableTrait;
 
-    protected $presenter = CategoryPresenter::class;
+    protected string $presenter = CategoryPresenter::class;
 
     protected $table = 'forum_categories';
 

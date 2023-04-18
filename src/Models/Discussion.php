@@ -18,7 +18,7 @@ class Discussion extends Base
     use Historable;
     use PresentableTrait;
 
-    protected $presenter = DiscussionPresenter::class;
+    protected string $presenter = DiscussionPresenter::class;
 
     protected $table = 'forum_discussions';
 
