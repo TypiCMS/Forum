@@ -27,6 +27,7 @@ class Discussion extends Base
     protected $casts = [
         'deleted_at' => 'datetime',
         'last_reply_at' => 'array',
+        'sticky' => 'boolean',
     ];
 
     public function user(): BelongsTo
