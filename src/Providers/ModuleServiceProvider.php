@@ -22,6 +22,8 @@ class ModuleServiceProvider extends ServiceProvider
         $this->mergeConfigFrom(__DIR__ . '/../config/forum_discussions.php', 'typicms.modules.forum_discussions');
         $this->mergeConfigFrom(__DIR__ . '/../config/forum_posts.php', 'typicms.modules.forum_posts');
 
+        $this->loadRoutesFrom(__DIR__ . '/../routes/forum.php');
+
         $this->loadViewsFrom(__DIR__ . '/../../resources/views/', 'forum');
 
         $this->publishes([__DIR__ . '/../../database/migrations/create_forum_tables.php.stub' => getMigrationFileName('create_forum_tables')], 'typicms-migrations');
@@ -42,8 +44,6 @@ class ModuleServiceProvider extends ServiceProvider
 
     public function register(): void
     {
-        $this->app->register(RouteServiceProvider::class);
-
         $this->app->register(PurifierServiceProvider::class);
 
         AliasLoader::getInstance()->alias('Purifier', Purifier::class);
