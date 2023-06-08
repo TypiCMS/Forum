@@ -17,6 +17,6 @@ const editorConfig = {
     },
 };
 const editors = document.querySelectorAll('.ckeditor-forum');
-for (var i = 0; i < editors.length; ++i) {
+for (let i = 0; i < editors.length; ++i) {
     CKEDITOR.replace(editors[i].id, editorConfig);
 }
