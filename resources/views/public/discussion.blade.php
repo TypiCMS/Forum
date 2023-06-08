@@ -3,11 +3,6 @@
 @extends('core::public.master')
 @section('mainContainerClass', 'main-forum')
 
-@push('js')
-    <script type="module" src="{{ asset('components/ckeditor4/ckeditor.js') }}"></script>
-    <script src="{{ asset('components/ckeditor4/config-forum.js') }}"></script>
-@endpush
-
 @section('content')
 
     <div class="forum">
@@ -172,43 +167,72 @@
 @stop
 
 @push('js')
+    <script src="{{ asset('components/ckeditor4/ckeditor.js') }}"></script>
+    <script src="{{ asset('components/ckeditor4/config-forum.js') }}"></script>
 
     <script>
-        $('document').ready(function () {
-            $('#email-notification').change(function () {
-                var loader = $('#forum-discussion-actions-notification-loader');
-                loader.addClass('loading');
-                $.post('{{ route($lang.'::forum.discussion.email', $discussion->id) }}', {_token: '{{ csrf_token() }}'}, function () {
-                    loader.removeClass('loading');
+        document.addEventListener('DOMContentLoaded', () => {
+            const emailNotification = document.querySelector('#email-notification');
+            const loader = document.querySelector('#forum-discussion-actions-notification-loader');
+
+            emailNotification.addEventListener('change', () => {
+                loader.classList.add('loading');
+                const csrfToken = '{{ csrf_token() }}'; // Replace with actual CSRF token value
+                const discussionId = '{{ $discussion->id }}'; // Replace with actual discussion ID value
+                const url = '{{ route($lang.'::forum.discussion.email', $discussion->id) }}'; // Replace with actual URL
+
+                fetch(url, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                        'X-CSRF-Token': csrfToken
+                    },
+                    body: `_token=${encodeURIComponent(csrfToken)}`
+                })
+                    .then(() => {
+                        loader.classList.remove('loading');
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                    });
+            });
+
+            const editButtons = document.querySelectorAll('.forum-post-actions-edit-button');
+            editButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const parent = button.closest('li');
+                    const id = parent.dataset.id;
+                    const body = parent.querySelector('.forum-post-content-text');
+                    parent.classList.add('editing');
+                    document.querySelector(`#post-edit-${id}`).textContent = body.innerHTML;
+                    CKEDITOR.replace(`post-edit-${id}`, editorConfig); // Replace with appropriate CKEditor configuration
                 });
             });
 
-            $('.forum-post-actions-edit-button').click(function () {
-                var parent = $(this).parents('li'),
-                    id = parent.data('id'),
-                    body = parent.find('.forum-post-content-text');
-                parent.addClass('editing');
-                $('#post-edit-' + id).text(body.html());
-                CKEDITOR.replace('post-edit-' + id, editorConfig);
+            const deleteButtons = document.querySelectorAll('.forum-post-actions-delete-button');
+            deleteButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const parent = button.closest('li');
+                    parent.classList.add('deleting');
+                    const id = parent.dataset.id;
+                });
             });
 
-            $('.forum-post-actions-delete-button').click(function () {
-                parent = $(this).parents('li');
-                parent.addClass('deleting');
-                id = parent.data('id');
+            const cancelButtons = document.querySelectorAll('.forum-post-content-form-cancel');
+            cancelButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const id = button.dataset.id;
+                    const li = button.closest('li');
+                    CKEDITOR.instances[`post-edit-${id}`].destroy();
+                    li.classList.remove('editing');
+                });
             });
 
-            $('.forum-post-content-form-cancel').click(function () {
-                var id = $(this).data('id'),
-                    li = $(this).parents('li');
-                CKEDITOR.instances['post-edit-' + id].destroy();
-                li.removeClass('editing');
-            });
-
-            $('.forum-post-delete-alert-cancel').click(function () {
-                $(this)
-                    .parents('li')
-                    .removeClass('deleting');
+            const deleteAlertCancelButtons = document.querySelectorAll('.forum-post-delete-alert-cancel');
+            deleteAlertCancelButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    button.closest('li').classList.remove('deleting');
+                });
             });
         });
     </script>
