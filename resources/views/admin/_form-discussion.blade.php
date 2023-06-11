@@ -1,4 +1,5 @@
 @component('core::admin._buttons-form', ['model' => $model])
+    
 @endcomponent
 
 {!! BootForm::hidden('id') !!}
@@ -9,7 +10,7 @@
     </div>
     <div class="col-md-6">
         <div class="mb-3 @if ($errors->has('slug'))has-error @endif">
-            {!! Form::label('<span>'.__('Slug').'</span>')->addClass('form-label')->forId('slug') !!}
+            {!! Form::label('<span>' . __('Slug') . '</span>')->addClass('form-label')->forId('slug') !!}
             <div class="input-group">
                 {!! Form::text('slug')->addClass('form-control')->addClass($errors->has('slug') ? 'is-invalid' : '')->id('slug')->data('slug', 'title') !!}
                 <button class="btn btn-outline-secondary btn-slug" type="button">{{ __('Generate') }}</button>
