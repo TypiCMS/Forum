@@ -28,25 +28,13 @@
                 <div class="col-md-8">
                     <div class="mb-3">
                         <label class="form-label" for="title">@lang('Title')</label>
-                        <input
-                            class="form-control"
-                            type="text"
-                            id="title"
-                            name="title"
-                            value="{{ old('title') }}"
-                            required
-                        />
+                        <input class="form-control" type="text" id="title" name="title" value="{{ old('title') }}" required />
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="mb-3">
                         <label class="form-label" for="forum_category_id">@lang('Category')</label>
-                        <select
-                            class="form-control custom-select"
-                            id="forum_category_id"
-                            name="forum_category_id"
-                            required
-                        >
+                        <select class="form-control custom-select" id="forum_category_id" name="forum_category_id" required>
                             <option value=""></option>
                             @foreach ($categories as $category)
                                 @if (old('forum_category_id') == $category->id)
