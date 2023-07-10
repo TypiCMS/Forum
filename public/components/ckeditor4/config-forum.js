@@ -1,10 +1,5 @@
 const editorConfig = {
-    toolbar: [
-        { items: ['Bold', 'Italic', 'Subscript', 'Superscript'] },
-        { items: ['NumberedList', 'BulletedList', 'Outdent', 'Indent'] },
-        { items: ['RemoveFormat'] },
-        { items: ['Source'] },
-    ],
+    toolbar: [{ items: ['Bold', 'Italic', 'Subscript', 'Superscript'] }, { items: ['NumberedList', 'BulletedList', 'Outdent', 'Indent'] }, { items: ['RemoveFormat'] }, { items: ['Source'] }],
     entities: false,
     height: 240,
     contentsCss: ['/components/ckeditor4/custom.css'],

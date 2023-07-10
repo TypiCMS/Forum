@@ -33,7 +33,7 @@
                         <div class="card-header">
                             <strong>{{ $post->user->first_name }} {{ $post->user->last_name }}</strong>
                             <small class="text-muted">{{ $post->created_at }}</small>
-                            @empty(! $post->deleted_at)
+                            @empty(!$post->deleted_at)
                                 <small class="text-danger">@lang('deleted')</small>
                             @endempty
                         </div>
