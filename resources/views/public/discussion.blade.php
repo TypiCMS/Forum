@@ -146,8 +146,7 @@
                                         <span class="visually-hidden">@lang('Loading…')</span>
                                     </div>
                                     <div class="form-check form-switch">
-                                        <input class="form-check-input" type="checkbox" id="email-notification" name="email-notification"
-                                            @if (!Auth::guest() && $discussion->users->contains(Auth::user()->id)) {{ 'checked' }} @endif />
+                                        <input class="form-check-input" type="checkbox" id="email-notification" name="email-notification" @if (!Auth::guest() && $discussion->users->contains(Auth::user()->id)) {{ 'checked' }} @endif />
                                         <label class="form-check-label" for="email-notification">
                                             @lang('Notify me when someone replies.')
                                         </label>
@@ -185,7 +184,8 @@
                 loader.classList.add('loading');
                 const csrfToken = '{{ csrf_token() }}'; // Replace with actual CSRF token value
                 const discussionId = '{{ $discussion->id }}'; // Replace with actual discussion ID value
-                const url = '{{ route($lang . '::forum.discussion.email', $discussion->id) }}'; // Replace with actual URL
+                const url =
+                    '{{ route($lang . '::forum.discussion.email', $discussion->id) }}'; // Replace with actual URL
 
                 fetch(url, {
                         method: 'POST',
@@ -211,7 +211,8 @@
                     const body = parent.querySelector('.forum-post-content-text');
                     parent.classList.add('editing');
                     document.querySelector(`#post-edit-${id}`).textContent = body.innerHTML;
-                    CKEDITOR.replace(`post-edit-${id}`, editorConfig); // Replace with appropriate CKEditor configuration
+                    CKEDITOR.replace(`post-edit-${id}`,
+                        editorConfig); // Replace with appropriate CKEditor configuration
                 });
             });
 

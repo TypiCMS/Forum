@@ -3,8 +3,7 @@
 @section('title', __('Discussions'))
 
 @section('content')
-    <item-list url-base="/api/forum/discussions" fields="id,forum_category_id,user_id,title,slug,sticky,views,answered,last_reply_at" table="forum_discussions" title="discussions" :publishable="false"
-        :searchable="['title']" :sorting="['-last_reply_at']">
+    <item-list url-base="/api/forum/discussions" fields="id,forum_category_id,user_id,title,slug,sticky,views,answered,last_reply_at" table="forum_discussions" title="discussions" :publishable="false" :searchable="['title']" :sorting="['-last_reply_at']">
         <template slot="columns" slot-scope="{ sortArray }">
             <item-list-column-header name="checkbox" v-if="$can('update forum_discussions')||$can('delete forum_discussions')"></item-list-column-header>
             <item-list-column-header name="show"></item-list-column-header>
